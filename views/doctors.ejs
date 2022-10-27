@@ -1,0 +1,51 @@
+<%- include('./header') -%>
+    <%- include('./navigation') -%>
+    <title>
+        <%= title %>
+    </title>
+        <div class="container-fluid py-5">
+            <div class="container">
+                <div class="row g-5">
+                    <% if(data.length> 0){ %>
+                        <% data.forEach(function(row){ %>
+                            <div class="col-lg-6 team-item">
+                                <div class="row g-0 bg-light rounded overflow-hidden">
+                                    <div class="col-12 col-sm-5 h-100">
+                                        <img class="img-fluid h-100" src="img/team-1.jpg" style="object-fit: cover;">
+                                    </div>
+                                    <div class="col-12 col-sm-7 h-100 d-flex flex-column">
+                                        <div class="mt-auto p-4">
+                                            <h3>
+                                                <%= row.doctor_name %>
+                                            </h3>
+                                            <h6 class="fw-normal fst-italic text-primary mb-4">
+                                                <%= row.specialty %> Specialist
+                                            </h6>
+                                            <h6 class="fw-normal fst-italic text-primary">
+                                                <%= row.hospital_name%>, <%= row.Suburb%>, <%= row.District%>
+                                            </h6>
+                                            <h6 class="fw-normal fst-italic text-primary mb-4">
+                                                <%= row.email %>
+                                            </h6>
+                                            <p class="m-0">Dolor lorem eos dolor duo eirmod sea. Dolor sit magna
+                                                rebum clita
+                                                rebum
+                                                dolor</p>
+                                        </div>
+                                        <div class="d-flex mt-auto border-top p-2">
+                                            <div class="col-12 text-center">
+                                                <button class="btn btn-primary px-md-3">View
+                                                    Profile</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <% })}%>
+                </div>
+            </div>
+        </div>
+        <script src="/location.js"></script>
+        <script src="/specificSearch.js"></script>
+
+        <%- include('./footer') -%>
