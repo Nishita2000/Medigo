@@ -28,7 +28,8 @@
                     <div class="col-lg-12">
                         <div class=" px-6">
                             <!--<h1 class="mb-4">Advanced Search</h1>-->
-                            <form action="http://localhost:3300/find" method="post">
+                            <!-- changed -->
+                            <form autocomplete="off" action="http://localhost:3300/find" method="post">
                                 <div class="row g-3">
                                     <!--h3>Search based on your location?</h3-->
                                     <!--h3>Search based on your location?</h3-->
@@ -39,10 +40,12 @@
                                         <input type="radio" name="Criteria" id="precSearchDoc" value="Doctor"> Doctor
                                     </div>
                                     <div class="text-dark col-3 col-sm-14 pt-2">
-                                        <input type="radio" name="Criteria" id="precSearchPubHos" value="Govt."> Govt. Hospital
+                                        <input type="radio" name="Criteria" id="precSearchPubHos" value="Govt."> Govt.
+                                        Hospital
                                     </div>
                                     <div class="text-dark col-3 col-sm-15 pt-2">
-                                        <input type="radio" name="Criteria" id="precSearchPriHos" value="Private"> Private Hospital
+                                        <input type="radio" name="Criteria" id="precSearchPriHos" value="Private">
+                                        Private Hospital
                                     </div>
                                 </div>
                                 <div class="row g-3 ">
@@ -59,7 +62,8 @@
                                             onclick="Enableprec();">
                                         No
                                     </div>
-                                    <div class=" col-7 col-sm-7 mx-auto px-5">
+                                    <!--changed-->
+                                    <div class="autoComplete col-7 col-sm-7 mx-auto px-5">
                                         <input type="text-dark" class="form-control bg-light border-0"
                                             style=" height: 45px;" placeholder="Name of hospital/clinic/doctor"
                                             name="preciseSearch" id="precSearch" disabled="disabled">
@@ -270,6 +274,7 @@
 
         <script src="/location.js"></script>
         <script src="/specificSearch.js"></script>
+        <script src="/autoComplete.js"></script>
 
 
         <%- include('./footer') -%>
