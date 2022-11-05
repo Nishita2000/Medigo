@@ -31,7 +31,9 @@ function Enableprec() {
         op4.disabled = false;
         op5.disabled = false;
     }
+
     let criteria_;
+
     let cri = document.getElementsByName('Criteria');
     cri.forEach((Criteria) => {
         if (Criteria.checked) {
@@ -39,24 +41,8 @@ function Enableprec() {
 
         }
     });
-    console.log(criteria_)
-    // fetch('/get_data').then(function (response) {
-
-    //     return response.json();
-
-    // }).then(function (responseData) {
-
-    //     //console.log(responseData)
-    //     var doctors_arr = [];
-    //     for (var count = 0; count < responseData.length; count++) {
-    //         doctors_arr[count] = responseData[count];
-    //     }
-    //     //console.log(doctors_arr);
 
 
-    // });
-
-    //console.log("doc")
     fetch('/get_data?cri=' + criteria_ + '').then(function (response) {
 
         return response.json();
@@ -68,25 +54,26 @@ function Enableprec() {
         for (var count = 0; count < responseData.length; count++) {
             doctors_arr[count] = responseData[count].name;
         }
+
         console.log(doctors_arr);
+
         autoComplete(document.getElementById("precSearch"), doctors_arr);
-        
-
-
     });
-
-
 }
+
 function autoComplete(inp, arr) {
     console.log(JSON.stringify(arr));
     /*the autoComplete function takes two arguments,
     the text field element and an array of possible autoCompleted values:*/
+    
     console.log("string");
+
     var currentFocus;
     /*execute a function when someone writes in the text field:*/
     inp.addEventListener("input", function (e) {
         var a, b, i, val = this.value;
         console.log(val);
+        const reg = new RegExp(val, "gi");
         /*close any already open lists of autoCompleted values*/
         closeAllLists();
         if (!val) { return false; }
@@ -100,13 +87,29 @@ function autoComplete(inp, arr) {
         /*for each item in the array...*/
         for (i = 0; i < arr.length; i++) {
             /*check if the item starts with the same letters as the text field value:*/
-            if ( arr[i].substring(0,val.length).toUpperCase()==val.toUpperCase()) {
-                /*create a DIV element for each matching element:*/
+            // if ( arr[i].substring(0,val.length).toUpperCase()==val.toUpperCase()) {
+            //     /*create a DIV element for each matching element:*/
+            //     b = document.createElement("DIV");
+            //     /*make the matching letters bold:*/
+            //     b.innerHTML = "<strong>" + arr[i].substring(0, val.length) + "</strong>";
+            //     console.log(b);//change
+            //     b.innerHTML += arr[i].substring(val.length);
+            //     console.log(b);//change
+            //     /*insert a input field that will hold the current array item's value:*/
+            //     b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+            //     /*execute a function when someone clicks on the item value (DIV element):*/
+            //     b.addEventListener("click", function (e) {
+            //         /*insert the value for the autoComplete text field:*/
+            //         inp.value = this.getElementsByTagName("input")[0].value;
+            //         /*close the list of autoCompleted values,
+            //         (or any other open lists of autoCompleted values:*/
+            //         closeAllLists();
+            //     });
+            //     a.appendChild(b);
+            // }
+            if (arr[i].match(reg)) {
                 b = document.createElement("DIV");
-                /*make the matching letters bold:*/
-                b.innerHTML = "<strong>" + arr[i].substring(0, val.length) + "</strong>";
-                b.innerHTML += arr[i].substring(val.length);
-                /*insert a input field that will hold the current array item's value:*/
+                b.innerHTML += arr[i];
                 b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
                 /*execute a function when someone clicks on the item value (DIV element):*/
                 b.addEventListener("click", function (e) {
