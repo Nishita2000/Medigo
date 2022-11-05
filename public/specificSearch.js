@@ -42,6 +42,7 @@ function Enableprec() {
         }
     });
 
+    console.log(criteria_)
 
     fetch('/get_data?cri=' + criteria_ + '').then(function (response) {
 
