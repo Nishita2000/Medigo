@@ -121,3 +121,33 @@ app.listen('3300', () => {
     console.log('Server started on port 3300');
 
 });
+app.get('/get_data', function(request, response, next){
+    var search_query = request.query.search_query;
+    // console.log(request.query.search_query);
+    //console.log("dummmy", request.query.dummy)
+
+    // var query = `
+    // SELECT name FROM doctor_info`;
+    let cri=request.query.cri;
+    if(cri=='Doctor')
+    {
+        console.log('doc');
+        var query = `
+    SELECT name FROM doctor_info`;
+
+    }
+    else
+    {
+        console.log(cri)
+        var query = `
+    SELECT name FROM hospital_info where type='${cri}'`;
+
+    }
+    db.query(query, function(error, data){
+
+        response.json(data);
+
+    });
+
+});
+

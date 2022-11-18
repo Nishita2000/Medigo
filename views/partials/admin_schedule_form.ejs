@@ -1,0 +1,39 @@
+<!-- <div class="form-floating mb-3">
+    <input type="text" class="form-control" id="floatingInput" placeholder="Doctor ID" name="doctor_id">
+    <label for="floatingInput">Doctor ID</label>
+</div> -->
+
+<!-- {{!-- <div class="col-6">
+<div class="form-floating mb-3">
+  <input type="text" class="form-control" id="floatingInput" value="{{this.phone}}" placeholder="Phone" name="phone">
+  <label for="floatingInput">Phone</label>
+</div>
+</div> --}} -->
+<div class="form-floating mb-3">
+    <div class="form-group">
+        <label for="exampleFormControlSelect1">Hospital</label>
+        <select class="form-control" id="hospital_id" name="hospital_id">
+            <% rows.forEach((row)=> { %>
+                <option value="<%= row.hospital_id %>">
+                    <%= row.name %>
+                </option>
+                <% }) %>
+        </select>
+    </div>
+</div>
+
+<div class="form-floating mb-3">
+    <div class="form-group">
+        <label for="exampleFormControlSelect1">Doctor</label>
+        <select class="form-control" id="doctor_id" name="doctor_id">
+            <% rows.forEach((row)=> { %>
+                <option value="<%= row.hospital_id %>">
+                    <%= row.name %>
+                </option>
+                <% }) %>
+        </select>
+    </div>
+</div>
+
+<div class="col-12 d-grid">
+    <button class="btn btn-primary" type="submit">Submit</button>

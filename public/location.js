@@ -10,7 +10,7 @@ function getLocation() {
 function showPosition(position) {
     //get location --ALVEE
     let { latitude, longitude } = position.coords;
-    fetch(`https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=4dad3123413a40eb941dedc3cb91ffcc`)
+    fetch(`https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=bed861394ea44b1caf30f6d5bbca39c0`)
         //fetch(`localhost:3000/getdoctor`)
         .then(response => response.json()).then(response => {
             let allDetails = response.results[0].components;

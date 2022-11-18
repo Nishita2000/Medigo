@@ -1,0 +1,58 @@
+<div class="col-6">
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="floatingInput" placeholder="Name" name="name">
+        <label for="floatingInput">Name</label>
+    </div>
+</div>
+
+<div class="col-6">
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="floatingInput" placeholder="Email" name="email">
+        <label for="floatingInput">Email</label>
+    </div>
+</div>
+
+<div class="col-6">
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="floatingInput" placeholder="mobile_no" name="mobile_no">
+        <label for="floatingInput">Contact no</label>
+    </div>
+</div>
+
+<!-- <div class="form-floating mb-3">
+    <input type="text" class="form-control" id="floatingInput" placeholder="Doctor ID" name="doctor_id">
+    <label for="floatingInput">Doctor ID</label>
+</div> -->
+
+<!-- {{!-- <div class="col-6">
+<div class="form-floating mb-3">
+  <input type="text" class="form-control" id="floatingInput" value="{{this.phone}}" placeholder="Phone" name="phone">
+  <label for="floatingInput">Phone</label>
+</div>
+</div> --}} -->
+<div class="form-group">
+    <label for="exampleFormControlSelect1">Specialization</label>
+    <select class="form-control" id="specialty" name="specialty">
+        <option>Cancer</option>
+        <option>Heart</option>
+        <option>ENT</option>
+        <option>Eye</option>
+        <option>General</option>
+    </select>
+</div>
+
+<!-- <div class="form-floating mb-3">
+    <div class="form-group">
+        <label for="exampleFormControlSelect1">Hospital</label>
+        <select class="form-control" id="hospital_id" name="hospital_id">
+            <%# rows.forEach((row)=> { %>
+                <option value="<%#= row.hospital_id %>">
+                    <%#= row.name %>
+                </option>
+                <%# }) %>
+        </select>
+    </div>
+</div> -->
+
+<div class="col-12 d-grid">
+    <button class="btn btn-primary" type="submit">Submit</button>
