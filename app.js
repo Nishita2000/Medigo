@@ -131,12 +131,27 @@ db.connect((err) => {
 
 //     }
 // })
+
+//19-11-2022 1:28 pm
+app.post('/viewProfile', (req,res) => {
+    console.log(JSON.stringify(req.query));
+    let sql = `select doctor_info.name as doctor_name,specialty,mobile_no,email,designation,degree,visit_fee,hospital_info.name as hospital_name,Suburb,District,Division from doctor_info,hospital_info,doctor_hospital where doctor_info.doctor_id='${req.query.doc_id}' and hospital_info.hospital_id='${req.query.hos_id}' and doctor_hospital.hospital_id=hospital_info.hospital_id and doctor_hospital.doctor_id=doctor_info.doctor_id`; 
+    let query = db.query(sql, (err, results) => {
+        if (err) throw err;
+        console.log(results);
+        res.render("doctor_profile", {
+            title: "Doctor_info",
+            data: results,
+        })
+    })
+})
+
 app.post('/find', async (req, res) => {
     console.log(JSON.stringify(req.body));
     var arr = [];
     if (req.body.Criteria == 'Doctor') {
         if (req.body.Precise == 'Yes') {
-            let sql = `select doctor_info.name as doctor_name,doctor_info.specialty,doctor_info.email,hospital_info.name as hospital_name,Suburb,District,designation,degree,visit_fee from doctor_info,hospital_info,doctor_hospital where doctor_info.name like'%${req.body.preciseSearch}%' and doctor_hospital.hospital_id=hospital_info.hospital_id and doctor_hospital.doctor_id=doctor_info.doctor_id`;
+            let sql = `select doctor_info.name as doctor_name,doctor_info.doctor_id,hospital_info.hospital_id,doctor_info.specialty,doctor_info.email,hospital_info.name as hospital_name,Suburb,District,designation,degree,visit_fee from doctor_info,hospital_info,doctor_hospital where doctor_info.name like'%${req.body.preciseSearch}%' and doctor_hospital.hospital_id=hospital_info.hospital_id and doctor_hospital.doctor_id=doctor_info.doctor_id`;
             let query = db.query(sql, (err, results) => {
                 if (err) throw err;
                 res.render("searchedDoctors", {
@@ -149,9 +164,9 @@ app.post('/find', async (req, res) => {
             if (req.body.Location == 'Yes') {
                 //console.log("YES");
                 //let sql = `select doctor_info.name as doctor_name,hospital_info.name as hospital_name from doctor_info,hospital_info where specialty='${req.body.specialized}' and (Suburb='${req.body.hideLoc[0]}' or (District='${req.body.hideLoc[1]}' and Suburb!='${req.body.hideLoc[0]}') or (Division='${req.body.hideLoc[2]}' and Suburb!='${req.body.hideLoc[0]}' and District!='${req.body.hideLoc[1]}')) and doctor_info.hospital_id=hospital_info.hospital_id`;
-                let sql = `select doctor_info.name as doctor_name,specialty,email,hospital_info.name as hospital_name,Suburb,District,designation,degree,visit_fee from doctor_info,hospital_info,doctor_hospital where specialty='${req.body.specialized}' and Suburb='${req.body.hideLoc[0]}' and doctor_hospital.hospital_id=hospital_info.hospital_id and doctor_hospital.doctor_id=doctor_info.doctor_id`;
-                let sql1 = `select doctor_info.name as doctor_name,specialty,email,hospital_info.name as hospital_name,Suburb,District,designation,degree,visit_fee from doctor_info,hospital_info,doctor_hospital where specialty='${req.body.specialized}' and (District='${req.body.hideLoc[1]}' and Suburb!='${req.body.hideLoc[0]}') and doctor_hospital.hospital_id=hospital_info.hospital_id and doctor_hospital.doctor_id=doctor_info.doctor_id`;
-                let sql2 = `select doctor_info.name as doctor_name,specialty,email,hospital_info.name as hospital_name,Suburb,District,designation,degree,visit_fee from doctor_info,hospital_info,doctor_hospital where specialty='${req.body.specialized}' and (Division='${req.body.hideLoc[2]}' and Suburb!='${req.body.hideLoc[0]}' and District!='${req.body.hideLoc[1]}') and doctor_hospital.hospital_id=hospital_info.hospital_id and doctor_hospital.doctor_id=doctor_info.doctor_id`;
+                let sql = `select doctor_info.name as doctor_name,doctor_info.doctor_id,hospital_info.hospital_id,specialty,email,hospital_info.name as hospital_name,Suburb,District,designation,degree,visit_fee from doctor_info,hospital_info,doctor_hospital where specialty='${req.body.specialized}' and Suburb='${req.body.hideLoc[0]}' and doctor_hospital.hospital_id=hospital_info.hospital_id and doctor_hospital.doctor_id=doctor_info.doctor_id`;
+                let sql1 = `select doctor_info.name as doctor_name,doctor_info.doctor_id,hospital_info.hospital_id,specialty,email,hospital_info.name as hospital_name,Suburb,District,designation,degree,visit_fee from doctor_info,hospital_info,doctor_hospital where specialty='${req.body.specialized}' and (District='${req.body.hideLoc[1]}' and Suburb!='${req.body.hideLoc[0]}') and doctor_hospital.hospital_id=hospital_info.hospital_id and doctor_hospital.doctor_id=doctor_info.doctor_id`;
+                let sql2 = `select doctor_info.name as doctor_name,doctor_info.doctor_id,hospital_info.hospital_id,specialty,email,hospital_info.name as hospital_name,Suburb,District,designation,degree,visit_fee from doctor_info,hospital_info,doctor_hospital where specialty='${req.body.specialized}' and (Division='${req.body.hideLoc[2]}' and Suburb!='${req.body.hideLoc[0]}' and District!='${req.body.hideLoc[1]}') and doctor_hospital.hospital_id=hospital_info.hospital_id and doctor_hospital.doctor_id=doctor_info.doctor_id`;
                 // let sql = `select * from hospital_info where District='${req.body.hideLoc[1]}'`;
                 let final_arr = [];
                 final_arr = final_arr.concat(await getResult(sql));
@@ -165,7 +180,7 @@ app.post('/find', async (req, res) => {
                 })
             }
             else {
-                let sql = `select doctor_info.name as doctor_name,specialty,email,hospital_info.name as hospital_name,Suburb,District,designation,degree,visit_fee from doctor_info,hospital_info,doctor_hospital where specialty='${req.body.specialized}' and doctor_hospital.hospital_id=hospital_info.hospital_id and doctor_hospital.doctor_id=doctor_info.doctor_id`;
+                let sql = `select doctor_info.name as doctor_name,doctor_info.doctor_id,hospital_info.hospital_id,specialty,email,hospital_info.name as hospital_name,Suburb,District,designation,degree,visit_fee from doctor_info,hospital_info,doctor_hospital where specialty='${req.body.specialized}' and doctor_hospital.hospital_id=hospital_info.hospital_id and doctor_hospital.doctor_id=doctor_info.doctor_id`;
                 let query = db.query(sql, (err, results) => {
                     if (err) throw err;
                     console.log(results);
@@ -252,6 +267,7 @@ app.get('/', (req, res) => {
 // })
 app.get('/doctors', (req, res) => {
     let sql = `select doctor_info.name as doctor_name,specialty,email,hospital_info.name as hospital_name,Suburb,District,designation,degree,visit_fee from doctor_info,hospital_info,doctor_hospital where doctor_hospital.hospital_id=hospital_info.hospital_id and doctor_hospital.doctor_id=doctor_info.doctor_id`;
+    //let sql = `select doctor_info.name as doctor_name,specialty,email,hospital_info.name as hospital_name,Suburb,District,designation,degree,visit_fee from doctor_info,hospital_info,doctor_hospital where doctor_name=(Select distinct doctor_info.name as doctor_name from doctor_info,hospital_info,doctor_hospital where doctor_hospital.hospital_id=hospital_info.hospital_id and doctor_hospital.doctor_id=doctor_info.doctor_id)`;
     let query = db.query(sql, (err, results) => {
         if (err) throw err;
         console.log(results);
