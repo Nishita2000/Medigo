@@ -3,8 +3,18 @@ const express = require('express');
 const router = express.Router();
 const homeController = require('../controllers/homeController');
 const loginController = require('../controllers/loginController');
+const homePageController = require('../controllers/homePageController');
+//import passport from "passport";
+const passport = require('passport')
+const initPassportLocal = require("../controllers/passportLocalController");
 
 
+
+
+// Init all passport
+
+
+//initPassportLocal();
 
 router.get('/admin', homeController.adminView);
 router.get('/admin/hospital', homeController.adminHospitalView);
@@ -28,19 +38,27 @@ router.post('/admin/doctor/assign', homeController.adminDoctorAssign)
 router.get('/admin/doctor/view_assigned', homeController.adminDoctorViewAssigned)
 router.get('/admin/doctor/view_assigned/delete/:doctor_id/:hospital_id', homeController.adminDoctorDeleteAssigned)
 
-router.get('/receptionist/login', loginController.receptionistLogin)
+//router.get('/receptionist/dashboard',  homePageController.getHomePage)
+router.get('/receptionist/login',  loginController.receptionistLogin)
 router.post('/receptionist/login', loginController.receptionistLoginPost)
+// router.post('/receptionist/login', passport.authenticate("local", {
+//     successRedirect: "/receptionist/dashboard",
+//     failureRedirect: '/receptionist/login',
+//     successFlash: true,
+//     failureFlash: true
+// }));
 router.get('/receptionist/register', loginController.receptionistRegister)
 router.post('/receptionist/register', loginController.receptionistRegisterPost)
+router.post("/logout", loginController.postLogOut);
+//router.get('/receptionist/view', homeController.reciptionistView)
+
 router.get('/admin/login', loginController.adminLogin)
 router.post('/admin/login', loginController.adminLoginPost)
 
 
-router.get('/receptionist/:id', homeController.reciptionistView)
+
 router.get('/admin/doctor/view_assigned/assign_recep/:doctor_id/:hospital_id', homeController.adminDoctorAssignReceptionistView)
 router.post('/admin/doctor/view_assigned/assign_recep/:doctor_id/:hospital_id', homeController.adminDoctorAssignReceptionist)
-
-
 
 
 module.exports = {

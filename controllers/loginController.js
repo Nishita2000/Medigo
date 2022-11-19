@@ -19,7 +19,8 @@ db.connect((err) => {
 
 const receptionistLogin = (req, res) => {
     res.render('receptionist_login', {
-        message: null
+        errors: req.flash("errors"),
+        message : null
     })
 }
 
@@ -150,11 +151,98 @@ const adminLoginPost = async (req, res) => {
     });
 }
 
+let checkLoggedIn = (req, res, next) => {
+    if (!req.isAuthenticated()) {
+        return res.redirect("/receptionist/login");
+    }
+    next();
+};
+
+let checkLoggedOut = (req, res, next) => {
+    if (req.isAuthenticated()) {
+        return res.redirect("/receptionist/dashboard");
+    }
+    next();
+};
+
+let postLogOut = (req, res) => {
+    req.session.destroy(function (err) {
+        return res.redirect("/receptionist/login");
+    });
+};
+
+const patientLogin = (req, res) => {
+    res.render('patient_login', {
+        errors: req.flash("errors"),
+        message: null
+    })
+}
+
+const patientRegister = (req, res) => {
+    res.render('patient_register', {
+        message: null
+    })
+}
+
+const patientRegisterPost = async (req, res) => {
+    const { name, mobile, email } = req.body;
+    const hashedPassword = await bcrypt.hash(req.body.password, 10)
+    let sql2 = 'SELECT EXISTS(SELECT * from patient_info WHERE mobile = ? or email = ?)'
+    let query = db.query(sql2, [mobile, email], (err, rows) => {
+        if (err) throw err;
+        var string = JSON.stringify(rows);
+        console.log(string);
+        //doesn't exist
+        if (string.includes(':0')) {
+            let sql = 'INSERT INTO patient_info SET name = ?, mobile = ?, email = ?, password = ?'
+            let query = db.query(sql, [name, mobile, email, hashedPassword], (err, rows) => {
+                if (err) throw err;
+                let message = encodeURIComponent('Entry added successfully');
+                res.redirect('/patient/login/?added=' + message)
+            });
+        }
+        else {
+            res.render('patient_register', {
+                message: 'This entry already exists'
+            })
+        }
+    });
+}
+
+let checkLoggedInPatient = (req, res, next) => {
+    if (!req.isAuthenticated()) {
+        return res.redirect("/patient/login");
+    }
+    next();
+};
+
+let checkLoggedOutPatient = (req, res, next) => {
+    if (req.isAuthenticated()) {
+        return res.redirect("/patient/dashboard");
+    }
+    next();
+};
+
+let postLogOutPatient = (req, res) => {
+    req.session.destroy(function (err) {
+        return res.redirect("/patient/login");
+    });
+};
+
 module.exports = {
     receptionistLogin,
     receptionistLoginPost,
     receptionistRegister,
     receptionistRegisterPost,
     adminLogin,
-    adminLoginPost
+    adminLoginPost,
+    checkLoggedIn,
+    checkLoggedOut,
+    postLogOut,
+    patientLogin,
+    patientRegister,
+    patientRegisterPost,
+    checkLoggedInPatient,
+    checkLoggedOutPatient,
+    postLogOutPatient
 }

@@ -3,6 +3,10 @@ const mysql = require('mysql');
 const app = express();
 const path = require("path");
 const homeRoutes = require('./routes/home-routes')
+const pateintLoginRoutes = require('./routes/patientlogin-routes')
+const session = require('express-session')
+const flush = require('connect-flash')
+const passport = require('passport')
 //const {allDetials}=require('./location.js');
 app.use(express.json());
 const bodyParser = require('body-parser');
@@ -10,6 +14,22 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
 //app.use(express.urlencoded({ extended: false }))
+//config session
+app.use(session({
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: false,
+    cookie: {
+        maxAge: 1000 * 60 * 60 * 24 // 86400000 1 day
+    }
+}));
+//enable flash
+app.use(flush());
+
+//config passport middleware
+app.use(passport.initialize())
+app.use(passport.session())
+
 
 
 
@@ -322,6 +342,7 @@ app.get('/navigation', (req, res) => {
 })
 
 app.use(homeRoutes.routes);
+app.use(pateintLoginRoutes.routes);
 
 app.listen('3300', () => {
     console.log('Server started on port 3300');

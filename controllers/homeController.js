@@ -292,13 +292,16 @@ const adminDoctorDeleteAssigned = (req, res) => {
 }
 
 const reciptionistView = (req, res) => {
-    let sql = 'SELECT * FROM receptionist_info WHERE receptionist_id = ?';
-    let query = db.query(sql, [req.params.id], (err, rows) => {
-        if (err) throw err;
-        res.render('receptionist_view', {
-            row: rows[0]
-        });
-    })
+    res.render('receptionist_view', {
+        //user : req.user
+    });
+    // let sql = 'SELECT * FROM receptionist_info WHERE receptionist_id = ?';
+    // let query = db.query(sql, [req.params.id], (err, rows) => {
+    //     if (err) throw err;
+    //     res.render('receptionist_view', {
+    //         row: rows[0]
+    //     });
+    // })
 }
 
 const adminDoctorAssignReceptionistView = (req, res) => {
