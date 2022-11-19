@@ -13,7 +13,8 @@ initPassportPatientLocal();
 router.get('/patient/dashboard', loginController.checkLoggedInPatient,homePageController.getHomePage2)
 router.get('/patient/login', loginController.checkLoggedOutPatient,loginController.patientLogin)
 router.post('/patient/login', passport.authenticate("local", {
-    successRedirect: '/patient/dashboard',
+    //successRedirect: '/patient/dashboard',
+    successRedirect: '/', // edited by alvee
     failureRedirect: '/patient/login',
     successFlash: true,
     failureFlash: true

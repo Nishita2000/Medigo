@@ -155,12 +155,14 @@ db.connect((err) => {
 //19-11-2022 1:28 pm
 app.post('/viewProfile',async (req,res) => {
     console.log(JSON.stringify(req.query));
+    console.log(req.user);
     let sql = `select doctor_info.name as doctor_name,specialty,mobile_no,email,designation,degree,visit_fee,first_day,last_day,time_slot,hospital_info.name as hospital_name,Suburb,District,Division from doctor_info,hospital_info,doctor_hospital where doctor_info.doctor_id='${req.query.doc_id}' and hospital_info.hospital_id='${req.query.hos_id}' and doctor_hospital.hospital_id=hospital_info.hospital_id and doctor_hospital.doctor_id=doctor_info.doctor_id`; 
     let query = db.query(sql, (err, results) => {
         if (err) throw err;
         console.log(results);
         res.render("doctor_profile", {
             data: results[0],
+            user: req.user
         })
     })
 })
