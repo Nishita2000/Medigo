@@ -7935,6 +7935,9 @@ fieldset:disabled .btn {
 .p-5 {
     padding: 3rem !important
 }
+.p-6 {
+    padding: 2rem !important
+}
 
 .px-0 {
     padding-right: 0 !important;

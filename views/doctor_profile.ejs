@@ -3,56 +3,65 @@
         <div class="container-fluid py-5">
             <div class="container">
                 <div class="row g-5">
-                            <div class="col-12 team-item">
-                                <div class="row g-0 bg-light rounded overflow-hidden">
-                                    <div class="col-12 col-sm-4 h-100">
-                                        <img class="img-fluid h-100" src="img/team-1.jpg" style="object-fit: cover;">
+                    <div class="col-12 team-item">
+                        <div class="row g-0 bg-light rounded overflow-hidden">
+                            <div class="col-12 col-sm-4 h-100">
+                                <img class="img-fluid h-100" src="img/team-1.jpg" style="object-fit: cover;">
+                            </div>
+                            <div class="col-6 col-sm-4 h-100 d-flex flex-column">
+                                <div class="mt-4 p-6">
+                                    <h3>
+                                        <%= data.doctor_name %>
+                                    </h3>
+                                    <h6 class="fw-normal fst-italic text-primary mb-4">
+                                        <%= data.degree %>
+                                    </h6>
+                                    <h6 class="fw-normal fst-italic text-primary">
+                                        <%= data.designation %>
+                                    </h6>
+                                    <h6 class="fw-normal fst-italic text-primary mb-4">
+                                        <%= data.hospital_name%>, <%= data.Suburb%>, <%= data.District%>
+                                    </h6>
+                                    <h5 class="fw-normal fst-italic text-secondary">
+                                        Time Slot:
+                                    </h5>
+                                    <h6 class="fw-normal fst-italic text-secondary">
+                                        <%= data.first_day%> - <%= data.last_day%>
+                                    </h6>
+                                    <h6 class="fw-normal fst-italic text-secondary">
+                                        <%= data.time_slot%> 
+                                    </h6>
+                                </div>
+                            </div>
+                            <div class="col-6 col-sm-3 h-100 d-flex flex-column">
+                                <div class="mt-4 p-5">
+                                    <div class="d-flex px-4">
+                                        <a href="#"><i class="fa fa-regular fa-money-bill"></i></a>
+                                        <h6 class="fw-normal fst-italic text-primary mb-4 p-1">
+                                            <%= data.visit_fee %> Tk
+                                        </h6>
                                     </div>
-                                    <div class="col-6 col-sm-4 h-100 d-flex flex-column">
-                                        <div class="mt-4 p-4">
-                                            <h3>
-                                                <%= data.doctor_name %>
-                                            </h3>
-                                            <h6 class="fw-normal fst-italic text-primary mb-4">
-                                                <%= data.degree %> 
-                                            </h6>
-                                            <h6 class="fw-normal fst-italic text-primary">
-                                                <%= data.designation %> 
-                                            </h6>
-                                            <h6 class="fw-normal fst-italic text-primary mb-4">
-                                                <%= data.hospital_name%>, <%= data.Suburb%>, <%= data.District%>
-                                            </h6>
-                                            <p class="m-0">Dolor lorem eos dolor duo eirmod sea. Dolor sit magna
-                                                rebum clita rebum dolor.Dolor lorem eos dolor duo eirmod sea.Dolor sit magna
-                                                rebum clita rebum dolor</p>
-                                        </div>
+                                    <div class="d-flex  px-4">
+                                        <a href="#"><i class="fa fa-solid fa-phone"></i></a>
+                                        <h6 class="fw-normal fst-italic text-primary mb-4 p-1">
+                                            <%= data.mobile_no %>
+                                        </h6>
                                     </div>
-                                    <div class="col-6 col-sm-3 h-100 d-flex flex-column">
-                                        <div class="mt-4 p-5">
-                                            <div class="d-flex px-4">
-                                                <a href="#"><i class="fa fa-regular fa-money-bill"></i></a>
-                                                <h6 class="fw-normal fst-italic text-primary mb-4 p-1">  <%= data.visit_fee %> Tk
-                                                </h6>
-                                            </div>
-                                            <div class="d-flex  px-4">
-                                                <a href="#"><i class="fa fa-solid fa-phone"></i></a>
-                                                <h6 class="fw-normal fst-italic text-primary mb-4 p-1">  <%= data.mobile_no %> 
-                                                </h6>
-                                            </div>
-                                            <div class="d-flex  px-4">
-                                                <a href="#"><i class="fa fa-solid fa-envelope"></i></a>
-                                                <h6 class="fw-normal fst-italic text-primary mb-4 p-1">  <%= data.email %>
-                                                </h6>
-                                            </div>
-                                             <div class="d-flex mt-auto px-4">
-                                            <div class="col-12 text-center">
-                                                <button class="btn btn-primary px-md-3">Book Appointment</button>
-                                            </div>
-                                        </div>
+                                    <div class="d-flex  px-4">
+                                        <a href="#"><i class="fa fa-solid fa-envelope"></i></a>
+                                        <h6 class="fw-normal fst-italic text-primary mb-4 p-1">
+                                            <%= data.email %>
+                                        </h6>
+                                    </div>
+                                    <div class="d-flex mt-auto px-4">
+                                        <div class="col-12 text-center">
+                                            <button class="btn btn-primary px-md-3">Book Appointment</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
