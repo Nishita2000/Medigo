@@ -63,49 +63,6 @@
         </div>
         <!-- Appointment Start -->
         <% if(user){ %>
-        <div class="container-fluid py-1">
-            <div class="container py-2">
-                <div class="row gx-5">
-                    <div class="col-12">
-                        <div class="bg-light  rounded p-5">
-                            <form>
-                                <div class="row g-3">
-                                    <div class="col-12 col-sm-6">
-                                        <input type="date" name="date" value="" class="form-control  border-0 "
-                                            placeholder="Date" style=" height: 55px;">
-                                    </div>
-                                    <div class="col-12 col-sm-6">
-                                        <input type="text" class="form-control  border-0" placeholder="Name" value="<%=user.name %>"
-                                            style="height: 55px;">
-                                    </div>
-                                    <div class="col-12 col-sm-6">
-                                        <input type="email" class="form-control  border-0" placeholder="Email" value="<%=user.email%>"
-                                            style="height: 55px;">
-                                    </div>
-                                    <div class="col-12 col-sm-6">
-                                        <input type="text" class="form-control  border-0" placeholder="Phone Number" value="<%=user.mobile%>"
-                                            style="height: 55px;">
-                                    </div>
-                                    <div class="form-floating  col-12 col-sm-12">
-                                        <input type="text" class="form-control  border-0" style="height: 100px;">
-                                        <label class="form-label" for="text">Additional Message</label>
-                                    </div>
-                                    <div class="col -12 col-sm-12">
-                                        <h6> Customer? <a href="#">Click here to login</a></h6>
-                                    </div>
-                                </div>
-                                <div class="col-12 text-center">
-                                    <button class="btn btn-primary w-50 py-3" type="submit">Book
-                                        Appointment</button>
-                                </div>
-                        </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        </div>
-        <%} else{%>
             <div class="container-fluid py-1">
                 <div class="container py-2">
                     <div class="row gx-5">
@@ -114,20 +71,21 @@
                                 <form>
                                     <div class="row g-3">
                                         <div class="col-12 col-sm-6">
-                                            <input type="date" name="date" value="" class="form-control  border-0 "
-                                                placeholder="Date" style=" height: 55px;">
+                                            <input type="date" name="date" id="calDate" value=""
+                                                class="form-control  border-0 " placeholder="Date"
+                                                style=" height: 55px;">
                                         </div>
                                         <div class="col-12 col-sm-6">
-                                            <input type="text" class="form-control  border-0" placeholder="Name" value=""
-                                                style="height: 55px;">
+                                            <input type="text" class="form-control  border-0" placeholder="Name"
+                                                value="<%=user.name %>" style="height: 55px;">
                                         </div>
                                         <div class="col-12 col-sm-6">
-                                            <input type="email" class="form-control  border-0" placeholder="Email" value=""
-                                                style="height: 55px;">
+                                            <input type="email" class="form-control  border-0" placeholder="Email"
+                                                value="<%=user.email%>" style="height: 55px;">
                                         </div>
                                         <div class="col-12 col-sm-6">
-                                            <input type="text" class="form-control  border-0" placeholder="Phone Number" value=""
-                                                style="height: 55px;">
+                                            <input type="text" class="form-control  border-0" placeholder="Phone Number"
+                                                value="<%=user.mobile%>" style="height: 55px;">
                                         </div>
                                         <div class="form-floating  col-12 col-sm-12">
                                             <input type="text" class="form-control  border-0" style="height: 100px;">
@@ -148,11 +106,69 @@
                 </div>
             </div>
             </div>
-            <%}%>
-        
-        <!-- Appointment End -->
+            <%} else{%>
+                <div class="container-fluid py-1">
+                    <div class="container py-2">
+                        <div class="row gx-5">
+                            <div class="col-12">
+                                <div class="bg-light  rounded p-5">
+                                    <form>
+                                        <div class="row g-3">
+                                            <div class="col-12 col-sm-6">
+                                                <input type="date" name="date" id="calDate" value=""
+                                                    class="form-control  border-0 " placeholder="Date"
+                                                    style=" height: 55px;">
+                                            </div>
+                                            <div class="col-12 col-sm-6">
+                                                <input type="text" class="form-control  border-0" placeholder="Name"
+                                                    value="" style="height: 55px;">
+                                            </div>
+                                            <div class="col-12 col-sm-6">
+                                                <input type="email" class="form-control  border-0" placeholder="Email"
+                                                    value="" style="height: 55px;">
+                                            </div>
+                                            <div class="col-12 col-sm-6">
+                                                <input type="text" class="form-control  border-0"
+                                                    placeholder="Phone Number" value="" style="height: 55px;">
+                                            </div>
+                                            <div class="form-floating  col-12 col-sm-12">
+                                                <input type="text" class="form-control  border-0"
+                                                    style="height: 100px;">
+                                                <label class="form-label" for="text">Additional Message</label>
+                                            </div>
+                                            <div class="col -12 col-sm-12">
+                                                <h6> Customer? <a href="#">Click here to login</a></h6>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 text-center">
+                                            <button class="btn btn-primary w-50 py-3" type="submit">Book
+                                                Appointment</button>
+                                        </div>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <%}%>
 
-        <script src="/location.js"></script>
-        <script src="/specificSearch.js"></script>
+                    <!-- Appointment End -->
+                    <script>
+                        var date = new Date();
+                        var tdate = date.getDate();
+                        var tmonth = date.getMonth() + 1;
+                        if (tdate < 10) {
+                            tdate = '0' + tdate;
+                        }
+                        if (tmonth < 10) {
+                            tmonth = '0' + tmonth;
+                        }
+                        var tyear = date.getUTCFullYear();
+                        var minYear = tyear + "-" + tmonth + "-" + tdate;
+                        document.getElementById("calDate").setAttribute('min', minYear);
+                    </script>
+                    <script src="/location.js"></script>
+                    <script src="/specificSearch.js"></script>
 
-        <%- include('./footer') -%>
+                    <%- include('./footer') -%>
