@@ -6,19 +6,20 @@
     <%- include('./navigation') -%>
         <!-- END LOADER -->
 
-        <div class="container-fluid py-4">
-            <div class="row">
-                <div class="col-md-7 mx-auto">
-                    <div class="card">
-                        <div class=" text-center card-header pb-0">
-                            <h6>Update Hospital</h6>
-                        </div>
-                        <div class="card-body">
-                            <p class="text-center text-uppercase text-sm">Hospital Information</p>
-                            <form class="row g-3 needs validation" method="POST" action="/admin/hospital/view/edit/<%=row.hospital_id  %> "
-                                novalidate>
-                                <%- include ("./partials/hospital_edit_form",{row}) %>
-                            </form>
+        <div class="container-fluid py-3">
+            <div class="container">
+                <div class="col-12">
+                    <div class="row g-0">
+                        <div class="col-md-7 mx-auto bg-light text-center rounded px-7 p-4">
+                            <h3>Update Hospital</h3>
+
+                            <div class="card-body">
+                                <p class="text-center text-uppercase text-sm">Hospital Information</p>
+                                <form class="row g-2 needs validation" method="POST"
+                                    action="/admin/hospital/view/edit/<%=row.hospital_id  %> " novalidate>
+                                    <%- include ("./partials/hospital_edit_form",{row}) %>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

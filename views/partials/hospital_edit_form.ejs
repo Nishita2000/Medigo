@@ -1,81 +1,120 @@
 <!--6 tarikh-->
-<% console.log(row) %> 
-<div class="col-6">
-    <div class="form-floating mb-3">
+<% console.log(row) %>
+    <div class="col-6 pt-2">
+        <!-- <div class="form-floating mb-1">
         <input type="text" class="form-control" id="floatingInput" value="<%=row.name %>" placeholder="Name" name="name">
         <label for="floatingInput">Name</label>
+    </div> -->
+        <div class="form-floating">
+            <input type="text" class="form-control" id="name" value="<%=row.name %>" name="name">
+            <label class="form-label" for="name">Name</label>
+        </div>
     </div>
-</div>
 
-<div class="col-6">
-    <div class="form-floating mb-3">
+    <div class="col-6 pt-2">
+        <!-- <div class="form-floating mb-1">
         <input type="text" class="form-control" id="floatingInput" value="<%=row.Suburb %>" placeholder="Suburb" name="suburb">
         <label for="floatingInput">Suburb</label>
+    </div> -->
+        <div class="form-floating">
+            <input type="text" class="form-control" id="suburb" value="<%=row.Suburb %>" name="suburb">
+            <label class="form-label" for="suburb">Suburb</label>
+        </div>
     </div>
-</div>
 
-<div class="col-6">
-    <div class="form-floating mb-3">
+    <div class="col-6">
+        <!-- <div class="form-floating mb-1">
         <input type="text" class="form-control" id="floatingInput" value="<%=row.District %>" placeholder="District" name="district">
         <label for="floatingInput">District</label>
+    </div> -->
+        <div class="form-floating mb-1">
+            <input type="text" class="form-control" id="district" value="<%=row.District %>" name="district">
+            <label class="form-label" for="district">District</label>
+        </div>
     </div>
-</div>
 
-<div class="col-6">
-    <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="floatingInput" value="<%=row.Division %>" placeholder="Division" name="division">
-        <label for="floatingInput">Division</label>
+    <div class="col-6">
+        <!-- <div class="form-floating mb-1">
+            <input type="text" class="form-control" id="floatingInput" value="<%=row.Division %>" placeholder="Division"
+                name="division">
+            <label for="floatingInput">Division</label>
+        </div> -->
+        <div class="form-floating mb-1">
+            <input type="text" class="form-control" id="division" value="<%=row.Division %>" name="division">
+             <label class="form-label" for="division">Division</label>
+        </div>
     </div>
-</div>
+    <div class="col-6">
+        <div class="form-floating">
+            <input type="text" class="form-control" id="hospital_email" value="<%=row.hospital_email %>"  name="hospital_email">
+            <label class="form-label"  for="hospital_email">Email</label>
+        </div>
+    </div>
+    
+    <div class="col-6">
+        <div class="form-floating mb-1">
+            <input type="text" class="form-control" id="contact_no" value="<%=row.contact_no %>" name="contact_no">
+            <label class="form-label" for="contact_no">Contact no</label>
+        </div>
+    </div>
 
-<!-- <div class="form-floating mb-3">
+    <!-- <div class="form-floating mb-1">
     <input type="text" class="form-control" id="floatingInput" placeholder="Hospital ID" name="hospital_id">
     <label for="floatingInput">Hospital ID</label>
 </div> -->
 
-<!-- {{!-- <div class="col-6">
-<div class="form-floating mb-3">
+    <!-- {{!-- <div class="col-6">
+<div class="form-floating mb-1">
   <input type="text" class="form-control" id="floatingInput" value="{{this.phone}}" placeholder="Phone" name="phone">
   <label for="floatingInput">Phone</label>
 </div>
 </div> --}} -->
-<div class="form-floating mb-3">
-    <div class="form-group">
-        <label for="exampleFormControlSelect1">Type</label>
-        <select class="form-control" id="type" name="type" selected="<%=row.type %>">
-            <option value="" selected disabled hidden>
-                <%= row.type %>
-            </option>
-            <option>private</option>
-            <option>govt.</option>
-            <!-- <option>3</option>
+    <div class="form-floating mb-1">
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Type</label>
+            <select class="form-control" id="type" name="type" selected="<%=row.type %>">
+                <option value="" selected disabled hidden>
+                    <%= row.type %>
+                </option>
+                <option>private</option>
+                <option>govt.</option>
+                <!-- <option>3</option>
                         <option>4</option>
                         <option>5</option> -->
-        </select>
+            </select>
+        </div>
     </div>
-</div>
 
-<div class="form-group">
-    <label for="exampleFormControlSelect1">Specialization</label>
-    <select class="form-control" id="specialization" name="specialization">
-        <!-- <option selected="selected">
+    <div class="form-group">
+        <label for="exampleFormControlSelect1">Specialization</label>
+        <select class="form-control" id="specialization" name="specialization">
+            <!-- <option selected="selected">
             <!%= row.specialization %> 
         </option> -->
-        <option value="" selected disabled hidden><%= row.Specialization %></option>
-        <option>Cancer</option>
-        <option>Heart</option>
-        <option>ENT</option>
-        <option>Eye</option>
-        <option>General</option>
-    </select>
-</div>
-
-<div class="col-12">
-    <div class="form-floating mb-3">
-        <textarea class="form-control" placeholder="Write description here" id="description" name="description"  style="height: 200px"> <%=row.description %> </textarea>
-        <label for="floatingInput">Description</label>
+            <option value="" selected disabled hidden>
+                <%= row.Specialization %>
+            </option>
+            <option>Cancer</option>
+            <option>Heart</option>
+            <option>ENT</option>
+            <option>Eye</option>
+            <option>General</option>
+        </select>
     </div>
-</div>
 
-<div class="col-12 d-grid">
-    <button class="btn btn-primary" onclick="return confirm('Are you sure you want to update?')" type="submit">Submit</button>
+    <div class="col-12 pt-1">
+        <!-- <div class="form-floating mb-1">
+            <textarea class="form-control" placeholder="Write description here" id="description" name="description"
+                style="height: 200px"> <%=row.description %> </textarea>
+            <label for="floatingInput">Description</label>
+        </div> -->
+        <div class="form-floating mb-1">
+            <textarea class="form-control"  id="description" name="description"
+                style="height: 200px"><%=row.description %></textarea>
+             <label class="form-label" for="description">Write description here</label>
+        </div>
+    </div>
+
+    <div class="col-12 d-grid pt-1">
+        <button class="btn btn-primary" onclick="return confirm('Are you sure you want to update?')"
+            type="submit">Submit</button>
