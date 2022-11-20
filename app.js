@@ -11,6 +11,7 @@ const passport = require('passport')
 app.use(express.json());
 const bodyParser = require('body-parser');
 const { ensureLoggedIn } = require('connect-ensure-login');
+const e = require('connect-flash');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
@@ -162,6 +163,7 @@ app.get('/viewProfile_doc_id=:did&hos_id=:hid',async (req,res) => {
         if (err) throw err;
         console.log(results);
         res.render('doctor_profile', {
+            errors: req.flash("errors"),
             data: results[0],
             user: req.user
         })
@@ -169,7 +171,7 @@ app.get('/viewProfile_doc_id=:did&hos_id=:hid',async (req,res) => {
 })
 app.get('/viewHosProfile_hos_id=:hid', (req,res)=>{
     console.log(JSON.stringify(req.params.hid))
-    let sql= `select doctor_info.name as doctor_name,doctor_info.doctor_id,hospital_info.hospital_id,specialty,email,hospital_email,contact_no,Specialization,hospital_info.description,hospital_info.name as hospital_name,Suburb,District,Division from doctor_info,hospital_info,doctor_hospital where hospital_info.hospital_id = ? and doctor_hospital.hospital_id=hospital_info.hospital_id and doctor_hospital.doctor_id=doctor_info.doctor_id`;
+    let sql= `select doctor_info.name as doctor_name,doctor_info.doctor_id,hospital_info.hospital_id,specialty,email,mobile_no,hospital_email,contact_no,Specialization,hospital_info.description,hospital_info.name as hospital_name,Suburb,District,Division from doctor_info,hospital_info,doctor_hospital where hospital_info.hospital_id = ? and doctor_hospital.hospital_id=hospital_info.hospital_id and doctor_hospital.doctor_id=doctor_info.doctor_id`;
     let query = db.query(sql,[req.params.hid],(err, results) => {
         if (err) throw err;
         console.log(results);
@@ -181,6 +183,23 @@ app.get('/viewHosProfile_hos_id=:hid', (req,res)=>{
 })
 app.post('/appointmentBook', (req,res) =>{
     console.log(req.body);
+    let sql = 'INSERT INTO appointment_info SET patient_id = ? , patient_name = ?, patient_email = ?, patient_mobile = ? ,appointment_date = ? ,message = ? ,doctor_id = ? ,hospital_id = ?,serial= ?'
+            let query = db.query(sql, [req.body.patid, req.body.patName, req.body.patEmail, req.body.patMobile, req.body.date, req.body.patMsg, req.body.docid, req.body.hosid,req.body.serial], (err, rows) => {
+                if (err) throw err;
+                let sql2=`select doctor_info.name as doctor_name,time_slot,serial,substr(appointment_date, 1, 10) as app_date from doctor_info,doctor_hospital,appointment_info where doctor_hospital.doctor_id='${req.body.docid}' and serial='${req.body.serial}' and doctor_info.doctor_id=doctor_hospital.doctor_id and appointment_info.doctor_id=doctor_hospital.doctor_id`;
+                let query2 = db.query(sql2, (err, results) => {
+                    if (err) throw err;
+                    console.log(results);
+                    res.render("booking_success", {
+                        data: results[0]
+                    })
+                })
+                //console.log(rows)
+                // res.render('hospital_add', {
+                //     message: 'hospital added succesfully'
+                // })
+
+            });
 })
 
 
@@ -317,6 +336,40 @@ app.get('/doctors', (req, res) => {
 
     });
     //res.render("doctors", {});
+})
+
+app.get('/dateCheck', (req,res)=>{
+    console.log(req.query)
+    let sql=`select count(*) as cnt,maximum_slot from appointment_info,doctor_hospital where appointment_date='${req.query.date}' and appointment_info.doctor_id='${req.query.docid}' and appointment_info.hospital_id='${req.query.hosid}' and appointment_info.doctor_id=doctor_hospital.doctor_id and appointment_info.hospital_id=doctor_hospital.hospital_id`;
+    let query = db.query(sql, (err, results) => {
+        if (err) throw err;
+        console.log(results)
+        console.log(results[0].cnt);
+        console.log(results[0].maximum_slot);
+        //console.log(results[1]);
+        if(results[0].cnt==results[0].maximum_slot)
+        {
+            console.log("slot no")
+            
+        //    res.json({message: "no slot available",});
+        res.json({message: "no slot available",
+        });
+           return;
+        }
+        else
+        {
+            console.log("slot yes")
+            // res.json({message: "slots available"});
+            res.json({message: "slots available",
+            cnt: results[0].cnt+1
+        });
+            // req.flash("errors",`slot available`)
+            // res.redirect("/viewProfile_doc_id="+docid+"&hos_id="+hosid);
+            // res.render("doctor_profile",{
+            //     message: 'slots available'
+            // })
+        }
+    })
 })
 
 app.get('/get_data', function(request, response, next){

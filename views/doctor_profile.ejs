@@ -71,24 +71,26 @@
                                 <form action="/appointmentBook" method="POST">
                                     <div class="row g-3">
                                         <div class="col-12 col-sm-6">
-                                            <input type="date" name="date" id="calDate" value="" onchange="check_query()"
-                                                class="form-control  border-0 " placeholder="Date"
-                                                style=" height: 55px;">
+                                            <input type="date" name="date" id="calDate" value=""
+                                                onchange="check_query()" class="form-control  border-0 "
+                                                placeholder="Date" style=" height: 55px;">
                                         </div>
                                         <div class="col-12 col-sm-6">
-                                            <input type="text" name="patName" class="form-control  border-0" placeholder="Name"
-                                                value="<%=user.name %>" style="height: 55px;">
+                                            <input type="text" name="patName" class="form-control  border-0"
+                                                placeholder="Name" value="<%=user.name %>" style="height: 55px;">
                                         </div>
                                         <div class="col-12 col-sm-6">
-                                            <input type="email" name="patEmail" class="form-control  border-0" placeholder="Email"
-                                                value="<%=user.email%>" style="height: 55px;">
+                                            <input type="email" name="patEmail" class="form-control  border-0"
+                                                placeholder="Email" value="<%=user.email%>" style="height: 55px;">
                                         </div>
                                         <div class="col-12 col-sm-6">
-                                            <input type="text" name="patMobile" class="form-control  border-0" placeholder="Phone Number"
-                                                value="<%=user.mobile%>" style="height: 55px;">
+                                            <input type="text" name="patMobile" class="form-control  border-0"
+                                                placeholder="Phone Number" value="<%=user.mobile%>"
+                                                style="height: 55px;">
                                         </div>
                                         <div class="form-floating  col-12 col-sm-12">
-                                            <input type="text" name="patMsg" class="form-control  border-0" style="height: 100px;">
+                                            <input type="text" name="patMsg" class="form-control  border-0"
+                                                style="height: 100px;">
                                             <label class="form-label" for="text" value="">Additional Message</label>
                                         </div>
                                         <div class="col -12 col-sm-12">
@@ -98,8 +100,9 @@
                                     <input type="hidden" name="docid" id="docHidden" value="<%=data.doctor_id%>">
                                     <input type="hidden" name="hosid" id="hosHidden" value="<%=data.hospital_id%>">
                                     <input type="hidden" name="patid" id="patHidden" value="<%=user.patient_id%>">
+                                    <input type="hidden" name="serial" id="appointmentSerial" value="">
                                     <div class="col-12 text-center">
-                                        <button class="btn btn-primary w-50 py-3" type="submit" >Book
+                                        <button class="btn btn-primary w-50 py-3" type="submit">Book
                                             Appointment</button>
                                     </div>
                             </div>
@@ -118,9 +121,9 @@
                                     <form>
                                         <div class="row g-3">
                                             <div class="col-12 col-sm-6">
-                                                <input type="date" name="date" id="calDate" value="" onchange="check_query()"
-                                                    class="form-control  border-0 " placeholder="Date"
-                                                    style=" height: 55px;">
+                                                <input type="date" name="date" id="calDate" value=""
+                                                    onchange="check_query()" class="form-control  border-0 "
+                                                    placeholder="Date" style=" height: 55px;">
                                             </div>
                                             <div class="col-12 col-sm-6">
                                                 <input type="text" class="form-control  border-0" placeholder="Name"
@@ -144,7 +147,8 @@
                                             </div>
                                         </div>
                                         <div class="col-12 text-center">
-                                            <button class="btn btn-primary w-50 py-3" type="submit" onclick="return alert('Please Log In.')">Book
+                                            <button class="btn btn-primary w-50 py-3" type="submit"
+                                                onclick="return alert('Please Log In.')">Book
                                                 Appointment</button>
                                         </div>
                                 </div>
@@ -172,11 +176,25 @@
                         document.getElementById("calDate").setAttribute('min', minYear);
                     </script>
                     <script>
-                        function check_query()
-                        {
+                        function check_query() {
                             console.log("yes")
-                            var date_=document.getElementById("calDate").value;
+                            var date_ = document.getElementById("calDate").value;
                             console.log(date_)
+                            fetch('/dateCheck?date=' + date_ + '&&docid=<%=data.doctor_id%>&&hosid=<%=data.hospital_id%>').then(function (response) {
+
+                                return response.json();
+
+                            }).then(function (responseData) {
+
+                                console.log(responseData);
+                                document.getElementById("appointmentSerial").value = responseData.cnt;
+                                if(responseData.message=='no slot available')
+                                {
+                                    alert(responseData.message);
+                                }
+                            });
+                        
+
                         }
                     </script>
                     <script src="/location.js"></script>
