@@ -1,31 +1,55 @@
-<div class="col-6">
-    <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="floatingInput" value="<%=row.name %>" placeholder="Name" name="name">
-        <label for="floatingInput">Name</label>
+<div class="col-6 pt-2">
+    <div class="form-floating">
+        <input type="text" class="form-control" id="name" value="<%=row.name %>" name="name">
+        <label class="form-label" for="name">Name</label>
+    </div>
+</div>
+
+<div class="col-6 pt-2">
+    <div class="form-floating">
+        <input type="text" class="form-control" id="email" value="<%=row.email %>" name="email">
+        <label class="form-label"  for="email">Email</label>
     </div>
 </div>
 
 <div class="col-6">
-    <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="floatingInput" value="<%=row.email %>" placeholder="Email" name="email">
-        <label for="floatingInput">Email</label>
+    <div class="form-floating mb-1">
+        <input type="text" class="form-control" id="mobile_no"  value="<%=row.mobile_no %>" name="mobile_no">
+        <label class="form-label"  for="floatingInput">Contact no</label>
+    </div>
+</div>
+<div class="col-6">
+    <div class="form-floating mb-1">
+        <input type="text" class="form-control" id="designation" value="<%=row.designation %>" name="designation">
+        <label class="form-label" for="designation">Designation</label>
+    </div>
+</div>
+<div class="col-6">
+    <div class="form-floating mb-1">
+        <input type="text" class="form-control" id="degree"  value="<%=row.degree %>" name="degree">
+        <label class="form-label" for="degree">Degree</label>
+    </div>
+</div>
+<div class="col-6">
+    <div class="form-floating mb-1">
+        <input type="text" class="form-control" id="visit_fee"  value="<%=row.visit_fee %>" name="visit_fee">
+        <label class="form-label" for="visit_fee">Visit Fee</label>
     </div>
 </div>
 
 <div class="col-6">
-    <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="floatingInput" value="<%=row.mobile_no %>" placeholder="mobile_no" name="mobile_no">
-        <label for="floatingInput">Contact no</label>
+    <div class="form-floating mb-1">
+        <input type="text" class="form-control" id="year_of_experience"  value="<%=row.year_of_experience%>" name="year_of_experience">
+        <label class="form-label" for="year_of_experience">Year of Experience</label>
     </div>
 </div>
-
-<!-- <div class="form-floating mb-3">
+<!-- <div class="form-floating mb-1">
     <input type="text" class="form-control" id="floatingInput" placeholder="Doctor ID" name="doctor_id">
     <label for="floatingInput">Doctor ID</label>
 </div> -->
 
 <!-- {{!-- <div class="col-6">
-<div class="form-floating mb-3">
+<div class="form-floating mb-1">
   <input type="text" class="form-control" id="floatingInput" value="{{this.phone}}" placeholder="Phone" name="phone">
   <label for="floatingInput">Phone</label>
 </div>
@@ -44,7 +68,7 @@
     </select>
 </div>
 
-<!-- <div class="form-floating mb-3">
+<!-- <div class="form-floating mb-1">
     <div class="form-group">
         <label for="exampleFormControlSelect1">Hospital</label>
         <select class="form-control" id="hospital_id" name="hospital_id">
@@ -57,5 +81,5 @@
     </div>
 </div> -->
 
-<div class="col-12 d-grid">
+<div class="col-12 d-grid pt-2">
     <button class="btn btn-primary" onclick="return confirm('Are you sure you want to update?')" type="submit" >Submit</button>
