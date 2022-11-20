@@ -4,7 +4,7 @@
  * Copyright 2011-2021 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
- :root {
+:root {
     --bs-blue: #0d6efd;
     --bs-indigo: #6610f2;
     --bs-purple: #6f42c1;
@@ -1084,6 +1084,7 @@ progress {
         flex: 0 0 auto;
         width: 100%
     }
+
 
     .offset-sm-0 {
         margin-left: 0
@@ -7707,11 +7708,13 @@ fieldset:disabled .btn {
 .m-4 {
     margin: 1.5rem !important
 }
-.m-6 {
-    margin: 2.5rem !important
-}
+
 .m-5 {
     margin: 3rem !important
+}
+
+.m-6 {
+    margin: 2.5rem !important
 }
 
 .m-auto {
@@ -7747,6 +7750,7 @@ fieldset:disabled .btn {
     margin-right: 3rem !important;
     margin-left: 3rem !important
 }
+
 .mx-6 {
     margin-left: 38.16rem !important
 }
@@ -7762,6 +7766,7 @@ fieldset:disabled .btn {
 .mx-9 {
     margin-left: 17rem !important
 }
+
 .mx-10 {
     margin-left: 26rem !important
 }
@@ -7942,6 +7947,7 @@ fieldset:disabled .btn {
 .p-5 {
     padding: 3rem !important
 }
+
 .p-6 {
     padding: 2rem !important
 }
@@ -7970,7 +7976,6 @@ fieldset:disabled .btn {
     padding-right: 1.3rem !important;
     padding-left: 1.3rem !important
 }
-
 
 .px-4 {
     padding-right: 1.5rem !important;
@@ -8021,10 +8026,12 @@ fieldset:disabled .btn {
     padding-top: 3rem !important;
     padding-bottom: 3rem !important
 }
+
 .py-6 {
     padding-top: 4rem !important;
     padding-bottom: 4rem !important
 }
+
 .py-8 {
     padding-top: 5rem !important;
     padding-bottom: 5rem !important
@@ -8050,14 +8057,16 @@ fieldset:disabled .btn {
     padding-top: 1.5rem !important
 }
 
+.pt-7 {
+    padding-top: 2.75rem !important;
+}
+
 .pt-5 {
     padding-top: 3rem !important
 }
+
 .pt-6 {
     padding-top: 3.5rem !important
-}
-.pt-7 {
-    padding-top: 2.75rem !important;
 }
 
 .pe-0 {
