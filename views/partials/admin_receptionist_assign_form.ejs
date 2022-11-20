@@ -1,7 +1,7 @@
-<div class="form-floating mb-3">
+<div class="form-floating mb-1">
     <div class="form-group">
         <label for="exampleFormControlSelect1">Doctor</label>
-        <select class="form-control" id="doctor_id" name="doctor_id">
+        <select class="form-control text-center" id="doctor_id" name="doctor_id">
                 <option value="<%= doctor_id %>">
                     <%= doctor_id %>
                 </option>
@@ -11,10 +11,10 @@
 
 
 
-<div class="form-floating mb-3">
+<div class="form-floating mb-1">
     <div class="form-group">
         <label for="exampleFormControlSelect1">Hospital</label>
-        <select class="form-control" id="hospital_id" name="hospital_id">
+        <select class="form-control text-center" id="hospital_id" name="hospital_id">
                 <option value="<%= hospital_id %>">
                     <%= hospital_id %>
                 </option>
@@ -22,10 +22,10 @@
     </div>
 </div>
 
-<div class="form-floating mb-3">
+<div class="form-floating mb-1">
     <div class="form-group">
         <label for="exampleFormControlSelect1">Receptionist</label>
-        <select class="form-control" id="receptionist_id" name="receptionist_id">
+        <select class="form-control text-center" id="receptionist_id" name="receptionist_id">
             <% receptionist_row.forEach((row)=> { %>
                 <option value="<%= row.receptionist_id %>">
                     <%= row.receptionist_name %>
@@ -36,5 +36,5 @@
 </div>
 
 
-<div class="col-12 d-grid">
+<div class="col-12 d-grid pt-2">
     <button class="btn btn-primary" type="submit">Submit</button>

@@ -4,41 +4,37 @@
     </div> -->
     <%- include('./navigation') -%>
         <!-- END LOADER -->
-
-<div class="card shadow-lg mx-4 card-profile-bottom">
-</div>
-<div class="container-fluid py-4">
-    <div class="row">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header pb-0">
-                    <div class="d-flex align-items-center">
-                        <p class="mb-0">Assign Receptionist</p>
-                        <!-- <p class="mb-6"> -->
+        <div class="container-fluid py-5">
+            <div class="container">
+                <div class="col-12">
+                    <div class="row g-0">
+                        <div class="col-md-6 mx-auto bg-light text-center rounded px-7 p-4">
+                            <h3>Assign Receptionist</h3>
+                            <!-- <p class="mb-6"> -->
                             <p>
-                            <% if(message) {%>
-                                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    <%= message %>
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                            aria-label="Close"></button>
-                                </div>
-                                <% } %>
-                        </p>
-                        <!-- <button class="btn btn-primary btn-sm ms-auto">Settings</button> -->
+                                <% if(message) {%>
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        <%= message %>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                aria-label="Close"></button>
+                                    </div>
+                                    <% } %>
+                            </p>
+                            <!-- <button class="btn btn-primary btn-sm ms-auto">Settings</button> -->
+                            <div>
+                                <h6 class="text-uppercase text-center">Receptionist information</h6>
+                                <form class="row g-2 needs validation" method="POST"
+                                    action="/admin/doctor/view_assigned/assign_recep/:doctor_id/:hospital_id"
+                                    novalidate>
+                                    <%- include
+                                        ("./partials/admin_receptionist_assign_form",{doctor_id},{hospital_id},{receptionist_row})
+                                        %>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="card-body">
-                    <p class="text-uppercase text-sm">Receptionist information</p>
-                    <form class="row g-3 needs validation" method="POST" action="/admin/doctor/view_assigned/assign_recep/:doctor_id/:hospital_id" novalidate>
-                        <%- include ("./partials/admin_receptionist_assign_form",{doctor_id},{hospital_id},{receptionist_row}) %>
-                    </form>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-</div>
-</div>
+    
 
-
-<%- include('./footer') -%>
