@@ -1,4 +1,4 @@
-<div class="form-floating mb-3">
+<div class="form-floating mb-1">
     <div class="form-group">
         <label for="exampleFormControlSelect1">Doctor</label>
         <select class="form-control" id="doctor_id" name="doctor_id">
@@ -13,7 +13,7 @@
 
 
 
-<div class="form-floating mb-3">
+<div class="form-floating mb-1">
     <div class="form-group">
         <label for="exampleFormControlSelect1">Hospital</label>
         <select class="form-control" id="hospital_id" name="hospital_id">
@@ -25,7 +25,30 @@
         </select>
     </div>
 </div>
-
-<div class="col-12 d-grid">
+<div class="col-6">
+    <div class="form-floating mb-1">
+        <input type="text" class="form-control" id="first_day" name="first_day">
+        <label class="form-label" for="first_day">First Day</label>
+    </div>
+</div>
+<div class="col-6">
+    <div class="form-floating mb-1">
+        <input type="text" class="form-control" id="last_day" name="last_day">
+        <label class="form-label" for="last_day">Last Day</label>
+    </div>
+</div>
+<div class="col-6">
+    <div class="form-floating mb-1">
+        <input type="text" class="form-control" id="time_slot" name="time_slot">
+        <label class="form-label" for="time_slot">Time Slot</label>
+    </div>
+</div>
+<div class="col-6">
+    <div class="form-floating mb-1">
+        <input type="text" class="form-control" id="maximum_slot" name="maximum_slot">
+        <label class="form-label" for="maximum_slot">Maximum Slot</label>
+    </div>
+</div>
+<div class="col-12 d-grid pt-2">
     <button class="btn btn-primary" type="submit">Submit</button>
 
