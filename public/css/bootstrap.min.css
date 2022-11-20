@@ -1050,6 +1050,11 @@ progress {
         width: 50%
     }
 
+    .col-sm-13 {
+        flex: 0 0 auto;
+        width: 54%
+    }
+
     .col-sm-7 {
         flex: 0 0 auto;
         width: 58.33333%
@@ -7702,7 +7707,9 @@ fieldset:disabled .btn {
 .m-4 {
     margin: 1.5rem !important
 }
-
+.m-6 {
+    margin: 2.5rem !important
+}
 .m-5 {
     margin: 3rem !important
 }
@@ -7959,6 +7966,12 @@ fieldset:disabled .btn {
     padding-left: 1rem !important
 }
 
+.px-7 {
+    padding-right: 1.3rem !important;
+    padding-left: 1.3rem !important
+}
+
+
 .px-4 {
     padding-right: 1.5rem !important;
     padding-left: 1.5rem !important
@@ -7999,9 +8012,22 @@ fieldset:disabled .btn {
     padding-bottom: 1.5rem !important
 }
 
+.py-7 {
+    padding-top: 2.75rem !important;
+    padding-bottom: 2.75rem !important
+}
+
 .py-5 {
     padding-top: 3rem !important;
     padding-bottom: 3rem !important
+}
+.py-6 {
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important
+}
+.py-8 {
+    padding-top: 5rem !important;
+    padding-bottom: 5rem !important
 }
 
 .pt-0 {
@@ -8026,6 +8052,12 @@ fieldset:disabled .btn {
 
 .pt-5 {
     padding-top: 3rem !important
+}
+.pt-6 {
+    padding-top: 3.5rem !important
+}
+.pt-7 {
+    padding-top: 2.75rem !important;
 }
 
 .pe-0 {
