@@ -157,7 +157,7 @@ app.get('/viewProfile_doc_id=:did&hos_id=:hid',async (req,res) => {
     //console.log(JSON.stringify(req.query));
     console.log(req.user);
     req.session.returnTo = req.originalUrl
-    let sql = `select doctor_info.name as doctor_name,specialty,mobile_no,email,designation,degree,visit_fee,first_day,last_day,time_slot,hospital_info.name as hospital_name,Suburb,District,Division from doctor_info,hospital_info,doctor_hospital where doctor_info.doctor_id= ? and hospital_info.hospital_id = ? and doctor_hospital.hospital_id=hospital_info.hospital_id and doctor_hospital.doctor_id=doctor_info.doctor_id`; 
+    let sql = `select doctor_info.name as doctor_name,doctor_info.doctor_id,hospital_info.hospital_id,specialty,mobile_no,email,designation,degree,visit_fee,first_day,last_day,time_slot,hospital_info.name as hospital_name,Suburb,District,Division from doctor_info,hospital_info,doctor_hospital where doctor_info.doctor_id= ? and hospital_info.hospital_id = ? and doctor_hospital.hospital_id=hospital_info.hospital_id and doctor_hospital.doctor_id=doctor_info.doctor_id`; 
     let query = db.query(sql,[req.params.did,req.params.hid],(err, results) => {
         if (err) throw err;
         console.log(results);
@@ -166,6 +166,21 @@ app.get('/viewProfile_doc_id=:did&hos_id=:hid',async (req,res) => {
             user: req.user
         })
     })
+})
+app.get('/viewHosProfile_hos_id=:hid', (req,res)=>{
+    console.log(JSON.stringify(req.params.hid))
+    let sql= `select doctor_info.name as doctor_name,doctor_info.doctor_id,hospital_info.hospital_id,specialty,email,hospital_email,contact_no,Specialization,hospital_info.description,hospital_info.name as hospital_name,Suburb,District,Division from doctor_info,hospital_info,doctor_hospital where hospital_info.hospital_id = ? and doctor_hospital.hospital_id=hospital_info.hospital_id and doctor_hospital.doctor_id=doctor_info.doctor_id`;
+    let query = db.query(sql,[req.params.hid],(err, results) => {
+        if (err) throw err;
+        console.log(results);
+        res.render('hospital_profile', {
+            data: results
+            //user: req.user
+        })
+    })
+})
+app.post('/appointmentBook', (req,res) =>{
+    console.log(req.body);
 })
 
 
@@ -220,7 +235,7 @@ app.post('/find', async (req, res) => {
     }
     else {
         if (req.body.Precise == 'Yes') {
-            let sql = `select name,suburb,district,specialization from hospital_info where name like'%${req.body.preciseSearch}%' and type='${req.body.Criteria}'`;
+            let sql = `select hospital_info.hospital_id,name,Suburb,District,Specialization from hospital_info where name like'%${req.body.preciseSearch}%' and type='${req.body.Criteria}'`;
             let query = db.query(sql, (err, results) => {
                 if (err) throw err;
                 console.log(results);
@@ -378,6 +393,4 @@ async function getResult(sql) {
 
     const result = await promise;
     return result;
-
-
 }

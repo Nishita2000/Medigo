@@ -68,33 +68,36 @@
                     <div class="row gx-5">
                         <div class="col-12">
                             <div class="bg-light  rounded p-5">
-                                <form>
+                                <form action="/appointmentBook" method="POST">
                                     <div class="row g-3">
                                         <div class="col-12 col-sm-6">
-                                            <input type="date" name="date" id="calDate" value=""
+                                            <input type="date" name="date" id="calDate" value="" onchange="check_query()"
                                                 class="form-control  border-0 " placeholder="Date"
                                                 style=" height: 55px;">
                                         </div>
                                         <div class="col-12 col-sm-6">
-                                            <input type="text" class="form-control  border-0" placeholder="Name"
+                                            <input type="text" name="patName" class="form-control  border-0" placeholder="Name"
                                                 value="<%=user.name %>" style="height: 55px;">
                                         </div>
                                         <div class="col-12 col-sm-6">
-                                            <input type="email" class="form-control  border-0" placeholder="Email"
+                                            <input type="email" name="patEmail" class="form-control  border-0" placeholder="Email"
                                                 value="<%=user.email%>" style="height: 55px;">
                                         </div>
                                         <div class="col-12 col-sm-6">
-                                            <input type="text" class="form-control  border-0" placeholder="Phone Number"
+                                            <input type="text" name="patMobile" class="form-control  border-0" placeholder="Phone Number"
                                                 value="<%=user.mobile%>" style="height: 55px;">
                                         </div>
                                         <div class="form-floating  col-12 col-sm-12">
-                                            <input type="text" class="form-control  border-0" style="height: 100px;">
-                                            <label class="form-label" for="text">Additional Message</label>
+                                            <input type="text" name="patMsg" class="form-control  border-0" style="height: 100px;">
+                                            <label class="form-label" for="text" value="">Additional Message</label>
                                         </div>
                                         <div class="col -12 col-sm-12">
                                             <h6> Customer? <a href="#">Click here to login</a></h6>
                                         </div>
                                     </div>
+                                    <input type="hidden" name="docid" id="docHidden" value="<%=data.doctor_id%>">
+                                    <input type="hidden" name="hosid" id="hosHidden" value="<%=data.hospital_id%>">
+                                    <input type="hidden" name="patid" id="patHidden" value="<%=user.patient_id%>">
                                     <div class="col-12 text-center">
                                         <button class="btn btn-primary w-50 py-3" type="submit" >Book
                                             Appointment</button>
@@ -115,7 +118,7 @@
                                     <form>
                                         <div class="row g-3">
                                             <div class="col-12 col-sm-6">
-                                                <input type="date" name="date" id="calDate" value=""
+                                                <input type="date" name="date" id="calDate" value="" onchange="check_query()"
                                                     class="form-control  border-0 " placeholder="Date"
                                                     style=" height: 55px;">
                                             </div>
@@ -167,6 +170,14 @@
                         var tyear = date.getUTCFullYear();
                         var minYear = tyear + "-" + tmonth + "-" + tdate;
                         document.getElementById("calDate").setAttribute('min', minYear);
+                    </script>
+                    <script>
+                        function check_query()
+                        {
+                            console.log("yes")
+                            var date_=document.getElementById("calDate").value;
+                            console.log(date_)
+                        }
                     </script>
                     <script src="/location.js"></script>
                     <script src="/specificSearch.js"></script>
