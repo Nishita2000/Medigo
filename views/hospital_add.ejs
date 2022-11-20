@@ -6,14 +6,14 @@
     <%- include('./navigation') -%>
         <!-- END LOADER -->
 
-        <div class="container-fluid py-4">
-            <div class="row">
-                <div class="col-md-7 mx-auto">
-                    <div class="card">
-                        <div class=" text-center card-header pb-0">
-                            <h6>Add Hospital</h6>
-                        </div>
-                        <!--<div class="d-flex align-items-center">
+        <div class="container-fluid py-3">
+            <div class="container">
+                <div class="col-12">
+                    <div class="row g-0">
+                        <div class="col-md-7 mx-auto bg-light text-center rounded px-7 p-4">
+                            <h3>Add Hospital</h3>
+
+                            <!--<div class="d-flex align-items-center">
                             <p class="mb-12">
                                 <% if(message) {%>
                                     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -26,17 +26,19 @@
                             <button class="btn btn-primary btn-sm ms-auto">Settings</button>
                         </div>
                     </div>-->
-                        <div class="card-body">
-                            <p class="text-center text-uppercase text-sm ">Hospital Information</p>
-                            <form class="row g-3 needs validation" method="POST" action="/admin/hospital/add"
-                                novalidate>
-                                <%- include ("./partials/hospital_form") %>
-                            </form>
+                            <div class="card-body">
+                                <h6 class="text-center text-uppercase text-sm ">Hospital Information</h6>
+                                <form class="row g-2 needs validation" method="POST" action="/admin/hospital/add"
+                                    novalidate>
+                                    <%- include ("./partials/hospital_form") %>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
 
 
-            <%- include('./footer') -%>
+
