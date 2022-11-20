@@ -7746,6 +7746,10 @@ fieldset:disabled .btn {
     margin-left: 1.5rem !important
 }
 
+.mx-11 {
+    margin-left: 2.5rem !important
+}
+
 .mx-5 {
     margin-right: 3rem !important;
     margin-left: 3rem !important
@@ -7807,6 +7811,7 @@ fieldset:disabled .btn {
     margin-bottom: 3rem !important
 }
 
+
 .my-auto {
     margin-top: auto !important;
     margin-bottom: auto !important
@@ -7832,9 +7837,22 @@ fieldset:disabled .btn {
     margin-top: 1.5rem !important
 }
 
+.mt-6 {
+    margin-top: 2.5rem !important
+}
+
 .mt-5 {
     margin-top: 3rem !important
 }
+
+.mt-7 {
+    margin-top: 5rem !important
+}
+
+.mt-8 {
+    margin-top: 6rem !important
+}
+
 
 .mt-auto {
     margin-top: auto !important
@@ -7888,8 +7906,17 @@ fieldset:disabled .btn {
     margin-bottom: 1.5rem !important
 }
 
+.mb-6 {
+    margin-bottom: 2.5rem !important
+}
+
+
 .mb-5 {
     margin-bottom: 3rem !important
+}
+
+.mb-7 {
+    margin-bottom: 6rem !important
 }
 
 .mb-auto {
@@ -8032,6 +8059,12 @@ fieldset:disabled .btn {
     padding-bottom: 4rem !important
 }
 
+
+.py-9 {
+    padding-top: 4.5rem !important;
+    padding-bottom: 4.5rem !important
+}
+
 .py-8 {
     padding-top: 5rem !important;
     padding-bottom: 5rem !important
@@ -8067,6 +8100,10 @@ fieldset:disabled .btn {
 
 .pt-6 {
     padding-top: 3.5rem !important
+}
+
+.pt-8 {
+    padding-top: 4.5rem !important
 }
 
 .pe-0 {

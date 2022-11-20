@@ -1,55 +1,65 @@
 <%- include('./header') -%>
-    <!-- <div id="preloader">
-        <img class="load" src="/img/preloader3.gif" alt="#">
-    </div> -->
     <%- include('./navigation') -%>
         <!-- END LOADER -->
+        <div class="container-fluid">
+            <div class="container">
+                <div class="col-12">
+                    <div class="row g-0 mx-5 my-3">
+                        <div class="col-12 col-sm-5 bg-light text-center rounded mx-11 mt-7 mb-7 pt-7">
+                            <h3>Admin Login</h3>
+                            <div class="tab-content">
+                                <div class="tab-pane fade show active" id="pills-login" role="tabpanel"
+                                    aria-labelledby="tab-login">
+                                    <form action="/admin/login" method="POST">
+                                        <!-- Email input -->
+                                        <% if(message) {%>
+                                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                <%= message %>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                        aria-label="Close"></button>
+                                            </div>
+                                            <% } %>
+                                                <div class="mx-4 mt-4" style="width: 377px;">
+                                                    <div class="form-floating">
+                                                        <input type="email" id="email" name="email"
+                                                            class="form-control" />
+                                                        <label class="form-label" for="email">email</label>
+                                                    </div>
+                                                </div>
 
-        <div class="tab-content">
-            <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
-                <form action="/admin/login" method="POST">
-                    <!-- Email input -->
-                    <% if(message) {%>
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <%= message %>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                        </div>
-                        <% } %>
-                            <div class="m-5" style="width: 400px;">
-                                <div class="form-floating mb-3">
-                                    <input type="email" id="email" name="email" class="form-control" />
-                                    <label class="form-label" for="email">email</label>
-                                </div>
-                            </div>
+                                                <!-- Password input -->
+                                                <div class="mx-4 my-3" style="width: 377px;">
+                                                    <div class="form-floating">
+                                                        <input type="password" id="password" name="password"
+                                                            class="form-control" />
+                                                        <label class="form-label" for="password">Password</label>
+                                                    </div>
+                                                </div>
 
-                            <!-- Password input -->
-                            <div class="m-5" style="width: 400px;">
-                                <div class="form-floating mb-3">
-                                    <input type="password" id="password" name="password" class="form-control" />
-                                    <label class="form-label" for="password">Password</label>
-                                </div>
-                            </div>
-
-                            <!-- 2 column grid layout -->
-                            <!-- <div class="row mb-4">
+                                                <!-- 2 column grid layout -->
+                                                <!-- <div class="row mb-4">
                             <div class="m-5"> -->
-                            <!-- Simple link -->
-                            <!-- <a href="#!">Forgot password?</a> -->
-                            <!-- </div>
+                                                <!-- Simple link -->
+                                                <!-- <a href="#!">Forgot password?</a> -->
+                                                <!-- </div>
                         </div> -->
 
-                            <!-- Submit button -->
-                            <div class="m-5">
-                                <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+                                                <!-- Submit button -->
+                                                <div class="mx-4 mt-4">
+                                                    <button type="submit" class="btn btn-primary btn-block mb-4">Sign
+                                                        in</button>
+                                                </div>
+                                    </form>
+                                </div>
                             </div>
-
-                            <!-- Register buttons -->
-                            <!-- <div class="m-5">
-                                <p>Not a member? <a href="/receptionist/register">Register</a></p>
-                            </div> -->
-                </form>
+                        </div>
+                        <div class="col-6 col-sm-6 mx-3">
+                            <img class="img-fluid h-70 py-9" src="../img/login-banner2.png">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+
 
         <%- include('./footer') -%>
