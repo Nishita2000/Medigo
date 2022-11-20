@@ -37,9 +37,7 @@
                                             <div class="d-flex mt-auto border-top p-2">
                                                 <div class="col-12 text-center">
                                                     <!-- fetch('/get_data?cri=' + criteria_ + '').then(function (response) { -->
-                                                    <form action="http://localhost:3300/viewProfile?doc_id=<%= row.doctor_id %>&hos_id=<%= row.hospital_id %>" method="POST"><button class="btn btn-primary px-md-3" type="submit">View
-                                                        Profile</button></form>
-                                                    
+                                                    <a class="btn btn-primary" href="/viewProfile_doc_id=<%=row.doctor_id %>&hos_id=<%=row.hospital_id%>" role="button">View</a>    
                                                 </div>
                                             </div>
                                         </div>

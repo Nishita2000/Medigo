@@ -10,6 +10,7 @@ const passport = require('passport')
 //const {allDetials}=require('./location.js');
 app.use(express.json());
 const bodyParser = require('body-parser');
+const { ensureLoggedIn } = require('connect-ensure-login');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
@@ -29,7 +30,6 @@ app.use(flush());
 //config passport middleware
 app.use(passport.initialize())
 app.use(passport.session())
-
 
 
 
@@ -153,19 +153,21 @@ db.connect((err) => {
 // })
 
 //19-11-2022 1:28 pm
-app.post('/viewProfile',async (req,res) => {
-    console.log(JSON.stringify(req.query));
+app.get('/viewProfile_doc_id=:did&hos_id=:hid',async (req,res) => {
+    //console.log(JSON.stringify(req.query));
     console.log(req.user);
-    let sql = `select doctor_info.name as doctor_name,specialty,mobile_no,email,designation,degree,visit_fee,first_day,last_day,time_slot,hospital_info.name as hospital_name,Suburb,District,Division from doctor_info,hospital_info,doctor_hospital where doctor_info.doctor_id='${req.query.doc_id}' and hospital_info.hospital_id='${req.query.hos_id}' and doctor_hospital.hospital_id=hospital_info.hospital_id and doctor_hospital.doctor_id=doctor_info.doctor_id`; 
-    let query = db.query(sql, (err, results) => {
+    req.session.returnTo = req.originalUrl
+    let sql = `select doctor_info.name as doctor_name,specialty,mobile_no,email,designation,degree,visit_fee,first_day,last_day,time_slot,hospital_info.name as hospital_name,Suburb,District,Division from doctor_info,hospital_info,doctor_hospital where doctor_info.doctor_id= ? and hospital_info.hospital_id = ? and doctor_hospital.hospital_id=hospital_info.hospital_id and doctor_hospital.doctor_id=doctor_info.doctor_id`; 
+    let query = db.query(sql,[req.params.did,req.params.hid],(err, results) => {
         if (err) throw err;
         console.log(results);
-        res.render("doctor_profile", {
+        res.render('doctor_profile', {
             data: results[0],
             user: req.user
         })
     })
 })
+
 
 app.post('/find', async (req, res) => {
     console.log(JSON.stringify(req.body));
@@ -334,7 +336,16 @@ app.get('/get_data', function(request, response, next){
 
 
 app.get('/about', (req, res) => {
-    res.render("about", {});
+    if (req.user) {
+        res.render("about", {
+            user: req.user
+        }); 
+    }
+    else {
+        req.session.returnTo = req.originalUrl
+        res.redirect('/patient/login')
+    }
+   
 })
 app.get('/entry', (req, res) => {
     res.render("entry", {});

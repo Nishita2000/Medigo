@@ -11,7 +11,7 @@
                             <div class="col-6 col-sm-4 h-100 d-flex flex-column">
                                 <div class="mt-4 p-6">
                                     <h3>
-                                        <%= data.doctor_name %>
+                                        <%=data.doctor_name %>
                                     </h3>
                                     <h6 class="fw-normal fst-italic text-primary mb-4">
                                         <%= data.degree %>
@@ -96,7 +96,7 @@
                                         </div>
                                     </div>
                                     <div class="col-12 text-center">
-                                        <button class="btn btn-primary w-50 py-3" type="submit">Book
+                                        <button class="btn btn-primary w-50 py-3" type="submit" >Book
                                             Appointment</button>
                                     </div>
                             </div>
@@ -137,11 +137,11 @@
                                                 <label class="form-label" for="text">Additional Message</label>
                                             </div>
                                             <div class="col -12 col-sm-12">
-                                                <h6> Customer? <a href="#">Click here to login</a></h6>
+                                                <h6> Customer? <a href="/patient/login">Click here to login</a></h6>
                                             </div>
                                         </div>
                                         <div class="col-12 text-center">
-                                            <button class="btn btn-primary w-50 py-3" type="submit">Book
+                                            <button class="btn btn-primary w-50 py-3" type="submit" onclick="return alert('Please Log In.')">Book
                                                 Appointment</button>
                                         </div>
                                 </div>
