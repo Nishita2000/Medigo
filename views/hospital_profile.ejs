@@ -18,13 +18,13 @@
                                     </h6>
 
                                     <h6 class="fw-normal fst-italic text-primary mb-4">
-                                     <%= data[0].Suburb%>, <%= data[0].District%>
+                                        <%= data[0].Suburb%>, <%= data[0].District%>
                                     </h6>
 
                                     <h6 class="fw-normal fst-italic text-primary mb-4">
                                         <%= data[0].description%>
-                                       </h6>
-                                    
+                                    </h6>
+
                                 </div>
                             </div>
                             <div class="col-6 col-sm-3 h-100 d-flex flex-column">
@@ -49,9 +49,67 @@
                 </div>
             </div>
         </div>
-        
+        <div class="container-fluid py-3">
+            <div class="container">
+                <div class="col-12">
+                    <div class="row g-0">
+                    <div class="col-12 col-sm-4">
+                    </div>
+                    <div class="col-6 col-sm-4">
+                        <h1 class="display-6 text-center  border-bottom border-5 py-1">Available Doctors</h1>
+                    </div>
+                </div>
+                </div>
+                <div class="row g-5 p-3">
+                    <% if(data.length> 0){ %>
+                        <% data.forEach(function(row){ %>
+                            <div class="col-lg-6 team-item">
+                                <div class="row g-0 bg-light rounded overflow-hidden">
+                                    <div class="col-12 col-sm-5 h-100">
+                                        <img class="img-fluid h-100" src="img/team-1.jpg" style="object-fit: cover;">
+                                    </div>
+                                    <div class="col-12 col-sm-7 h-100 d-flex flex-column">
+                                        <div class="mt-auto p-4">
+                                            <h3>
+                                                <%= row.doctor_name %>
+                                            </h3>
+                                            <h6 class="fw-normal fst-italic text-primary mb-4">
+                                                <%= row.specialty %> Specialist
+                                            </h6>
+                                            <h6 class="fw-normal fst-italic text-primary">
+                                                <%= row.mobile_no %>
+                                            </h6>
+                                            <h6 class="fw-normal fst-italic text-primary mb-4">
+                                                <%= row.email %>
+                                            </h6>
+                                            <p class="m-0">Dolor lorem eos dolor duo eirmod sea. Dolor sit magna
+                                                rebum clita
+                                                rebum
+                                                dolor</p>
+                                        </div>
+                                        <div class="d-flex mt-auto border-top p-2">
+                                            <div class="col-12 text-center">
+                                                <!-- fetch('/get_data?cri=' + criteria_ + '').then(function (response) { -->
+                                                <a class="btn btn-primary"
+                                                    href="/viewProfile_doc_id=<%=row.doctor_id %>&hos_id=<%=row.hospital_id%>"
+                                                    role="button">View Info</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <% })}else{%>
+                                <div class="mb-4 p-4 text-center ">
+                                    <h3>No Search found</h3>
+                                </div>
+                                <%}%>
+                </div>
+            </div>
+        </div>
 
-                    <script src="/location.js"></script>
-                    <script src="/specificSearch.js"></script>
 
-                    <%- include('./footer') -%>
+
+        <script src="/location.js"></script>
+        <script src="/specificSearch.js"></script>
+
+        <%- include('./footer') -%>
