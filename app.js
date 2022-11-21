@@ -12,6 +12,7 @@ app.use(express.json());
 const bodyParser = require('body-parser');
 const { ensureLoggedIn } = require('connect-ensure-login');
 const e = require('connect-flash');
+// const nodemailer = require('nodemailer');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
@@ -152,6 +153,20 @@ db.connect((err) => {
 
 //     }
 // })
+
+app.get('/viewPatient_doc_id=:did&hos_id=:hid', (req,res) => {
+    console.log(req.params);
+    let sql=`select patient_name,patient_email,patient_mobile,serial,substr(appointment_date, 1, 10) as app_date,serial from appointment_info where doctor_id= ? and hospital_id = ?`;
+    let query = db.query(sql,[req.params.did,req.params.hid],(err, results) => {
+        if (err) throw err;
+        console.log(results);
+        // res.render('doctor_profile', {
+        //     errors: req.flash("errors"),
+        //     data: results[0],
+        //     user: req.user
+        // })
+    })
+})
 
 //19-11-2022 1:28 pm
 app.get('/viewProfile_doc_id=:did&hos_id=:hid',async (req,res) => {
