@@ -1,0 +1,53 @@
+<%- include('./header') -%>
+    <!-- <div id="preloader">
+        <img class="load" src="/img/preloader3.gif" alt="#">
+    </div> -->
+        <!-- END LOADER -->
+
+        <div class="container-fluid py-5">
+            <div class="container">
+                <div class="col-12">
+                    <div class="row g-0">
+                        <div class="col-12 mx-auto bg-light text-center rounded px-7 p-4">
+                            <h3>List of Patients</h3>
+                            <!-- 6 tarikhhhhhh-->
+                            <div class="card-body px-0 pt-0 pb-2">
+                                <div class="table-responsive p-0">
+                                    <table class="table align-items-center mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th
+                                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                    Patient Name</th>
+                                                <th
+                                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">
+                                                    Patient Email</th>
+                                                <th
+                                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                    Patient Mobile</th>
+                                                <th
+                                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                    Appointment date</th>
+                                                <th
+                                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                    Serial Number</th>
+                                                <!-- <th class="text-secondary opacity-7"></th>
+                                                <th class="text-secondary opacity-7"></th> -->
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% rows.forEach((row)=> { %>
+                                                <tr>
+                                                    <%- include ("./partials/receptionist_patient_view", {row}) %>
+                                                </tr>
+                                                <% }) %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        

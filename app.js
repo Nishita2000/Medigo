@@ -160,11 +160,11 @@ app.get('/viewPatient_doc_id=:did&hos_id=:hid', (req,res) => {
     let query = db.query(sql,[req.params.did,req.params.hid],(err, results) => {
         if (err) throw err;
         console.log(results);
-        // res.render('doctor_profile', {
-        //     errors: req.flash("errors"),
-        //     data: results[0],
-        //     user: req.user
-        // })
+        res.render('receptionist_patient_list', {
+            // errors: req.flash("errors"),
+            data: results
+            // user: req.user
+        })
     })
 })
 
