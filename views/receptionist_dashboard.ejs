@@ -2,16 +2,16 @@
     <!-- <div id="preloader">
         <img class="load" src="/img/preloader3.gif" alt="#">
     </div> -->
-    <%- include('./navigation') -%>
+    <%- include('./navigation_logout') -%>
         <!-- END LOADER -->
-        <h1>I am <%=info[0].receptionist_name%> </h1>
+        <!-- <h1>I am <%=info[0].receptionist_name%> </h1> -->
         <!-- <a class="btn btn-primary" href="/receptionist/view" role="button">View</a> -->
-        <div>
+        <!-- <div>
             <form method="POST" action="/logout">
                 <button type="submit" class="btn btn-primary">Log out</button>
             </form>
-        </div>
-        <div class="col-12 text-center">
+        </div> -->
+        <div class="col-12 text-center pt-3">
             <a class="btn btn-primary" href="/viewPatient_doc_id=<%=info[0].doctor_id %>&hos_id=<%=info[0].hospital_id%>" role="button">View Patient</a>    
         </div>
 
