@@ -45,8 +45,8 @@ const adminHospitalAddView = (req, res) => {
 }
 
 const adminHospitalAdd = (req, res) => {
-    const { name, suburb, district, division, hospital_id, type, specialization, description } = req.body;
-    let sql2 = 'SELECT EXISTS(SELECT * from hospital_info WHERE name = ? and suburb = ? and district = ? and division = ?)'
+    const { name, suburb, district, division, hospital_id, type, specialization, description,hospital_email,contact_no } = req.body;
+    let sql2 = 'SELECT EXISTS(SELECT * from hospital_info WHERE name = ? and Suburb = ? and District = ? and Division = ?)'
     let query = db.query(sql2, [name, suburb, district, division], (err, rows) => {
         if (err) throw err;
         var string = JSON.stringify(rows);
@@ -57,8 +57,8 @@ const adminHospitalAdd = (req, res) => {
         }
         else {
             //console.log('doesntexist')
-            let sql = 'INSERT INTO hospital_info SET name = ? , suburb = ?, district = ?, division = ? ,hospital_id = ? ,type = ? ,specialization = ? ,description = ?'
-            let query = db.query(sql, [name, suburb, district, division, hospital_id, type, specialization, description], (err, rows) => {
+            let sql = 'INSERT INTO hospital_info SET name = ? , Suburb = ?, District = ?, Division = ? ,hospital_id = ? ,type = ? ,Specialization = ? ,description = ?,hospital_email= ?, contact_no= ?'
+            let query = db.query(sql, [name, suburb, district, division, hospital_id, type, specialization, description,hospital_email,contact_no], (err, rows) => {
                 if (err) throw err;
                 //console.log(rows);
                 res.render('hospital_add', {
@@ -82,9 +82,9 @@ const adminHospitalEdit = (req, res) => {
 }
 
 const adminHospitalUpdate = (req, res) => {
-    const { name, suburb, district, division, type, specialization, description } = req.body;
-    let sql = 'UPDATE hospital_info SET name = ? , suburb = ?, district = ?, division = ? , type = ? ,specialization = ? , description = ? WHERE hospital_id = ?';
-    let query = db.query(sql, [name, suburb, district, division, type, specialization, description, req.params.id], (err, rows) => {
+    const { name, suburb, district, division, type, specialization, description,hospital_email,contact_no } = req.body;
+    let sql = 'UPDATE hospital_info SET name = ? , Suburb = ?, District = ?, Division = ? , type = ? ,Specialization = ? , description = ?, hospital_email= ?, contact_no= ? WHERE hospital_id = ?';
+    let query = db.query(sql, [name, suburb, district, division, type, specialization, description,hospital_email,contact_no, req.params.id], (err, rows) => {
         if (err) {
             console.log('I am in this')
             throw err;
@@ -144,7 +144,7 @@ const adminDoctorAddView = (req, res) => {
 }
 
 const adminDoctorAdd = (req, res) => {
-    const { name, specialty, mobile_no, email } = req.body;
+    const { name, specialty, mobile_no, email, designation, degree, visit_fee,year_of_experience } = req.body;
     let sql2 = 'SELECT EXISTS(SELECT * from doctor_info WHERE name = ? and specialty = ? and mobile_no = ? and email = ?)'
     let query = db.query(sql2, [name, specialty, mobile_no, email], (err, rows) => {
         if (err) throw err;
@@ -157,8 +157,8 @@ const adminDoctorAdd = (req, res) => {
         }
         else {
             //console.log('doesntexist')
-            let sql = 'INSERT INTO doctor_info SET name = ? , specialty = ?, mobile_no = ? ,email = ?'
-            let query = db.query(sql, [name, specialty, mobile_no, email], (err, rows) => {
+            let sql = 'INSERT INTO doctor_info SET name = ? , specialty = ?, mobile_no = ? ,email = ?, designation = ?, degree= ?, visit_fee= ?, year_of_experience= ?'
+            let query = db.query(sql, [name, specialty, mobile_no, email,designation,degree,visit_fee,year_of_experience], (err, rows) => {
                 if (err) throw err;
                 //console.log(rows);
                 res.render('admin_doctor_add', {
@@ -205,9 +205,9 @@ const adminDoctorEdit = (req, res) => {
 }
 
 const adminDoctorUpdate = (req, res) => {
-    const { name, specialty, mobile_no, email } = req.body;
-    let sql = 'UPDATE doctor_info SET name = ? , specialty = ?, mobile_no = ? ,email = ? WHERE doctor_id = ?'
-    let query = db.query(sql, [name, specialty, mobile_no, email, req.params.id], (err, rows) => {
+    const { name, specialty, mobile_no, email,designation,degree,visit_fee,year_of_experience } = req.body;
+    let sql = 'UPDATE doctor_info SET name = ? , specialty = ?, mobile_no = ? ,email = ?,designation= ?, degree= ?, visit_fee= ?, year_of_experience= ? WHERE doctor_id = ?'
+    let query = db.query(sql, [name, specialty, mobile_no, email,designation,degree,visit_fee,year_of_experience, req.params.id], (err, rows) => {
         if (err) {
             //console.log('I am in this')
             throw err;
@@ -233,7 +233,7 @@ const adminDoctorAssignView = (req, res) => {
 }
 
 const adminDoctorAssign = (req, res) => {
-    const { doctor_id, hospital_id } = req.body;
+    const { doctor_id, hospital_id,time_slot,maximum_slot,first_day,last_day } = req.body;
     let sql2 = 'SELECT * FROM doctor_info';
     let query = db.query(sql2, (err, doctor_row) => {
         let sql3 = 'SELECT * FROM hospital_info';
@@ -250,8 +250,8 @@ const adminDoctorAssign = (req, res) => {
                     })
                 }
                 else {
-                    let sql4 = 'INSERT INTO doctor_hospital SET doctor_id = ?, hospital_id = ?'
-                    let query = db.query(sql4, [doctor_id, hospital_id], (err, rows) => {
+                    let sql4 = 'INSERT INTO doctor_hospital SET doctor_id = ?, hospital_id = ?,time_slot= ?, maximum_slot= ?, first_day= ?, last_day= ?'
+                    let query = db.query(sql4, [doctor_id, hospital_id,time_slot,maximum_slot,first_day,last_day], (err, rows) => {
                         if (err) throw err;
                         //console.log(rows);
                         res.render('admin_doctor_assign', {
