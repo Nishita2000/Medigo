@@ -19,7 +19,7 @@
                                                 <%= row.doctor_name %>
                                             </h3>
                                             <h6 class="fw-normal fst-italic text-primary mb-4">
-                                                <%= row.specialty %> Specialist
+                                                <%= row.degree %> 
                                             </h6>
                                             <h6 class="fw-normal fst-italic text-primary">
                                                 <%= row.hospital_name%>, <%= row.Suburb%>, <%= row.District%>
@@ -27,15 +27,13 @@
                                             <h6 class="fw-normal fst-italic text-primary mb-4">
                                                 <%= row.email %>
                                             </h6>
-                                            <p class="m-0">Dolor lorem eos dolor duo eirmod sea. Dolor sit magna
-                                                rebum clita
-                                                rebum
-                                                dolor</p>
+                                            <h6 class="fw-normal fst-italic text-primary mb-4">
+                                                <%= row.year_of_experience %> years of Experience 
+                                            </h6>
                                         </div>
                                         <div class="d-flex mt-auto border-top p-2">
                                             <div class="col-12 text-center">
-                                                <button class="btn btn-primary px-md-3">View
-                                                    Profile</button>
+                                                <a class="btn btn-primary" href="/viewProfile_doc_id=<%=row.doctor_id %>&hos_id=<%=row.hospital_id%>" role="button">View Info</a>
                                             </div>
                                         </div>
                                     </div>
