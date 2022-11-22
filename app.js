@@ -21,7 +21,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(session({
     secret: 'secret',
     resave: true,
-    saveUninitialized: false,
+    saveUninitialized: true,
     cookie: {
         maxAge: 1000 * 60 * 60 * 24 // 86400000 1 day
     }
@@ -50,6 +50,12 @@ db.connect((err) => {
     console.log('MySql connected....');
 
 });
+
+app.post('/patient/logout', (req,res)=>{
+    req.session.destroy(function (err) {
+        return res.redirect("/");
+    });
+})
 
 //let {city}=allDetails;
 
@@ -191,8 +197,8 @@ app.get('/viewHosProfile_hos_id=:hid', (req,res)=>{
         if (err) throw err;
         console.log(results);
         res.render('hospital_profile', {
-            data: results
-            //user: req.user
+            data: results,
+            user: req.user
         })
     })
 })
@@ -206,7 +212,8 @@ app.post('/appointmentBook', (req,res) =>{
                     if (err) throw err;
                     console.log(results);
                     res.render("booking_success", {
-                        data: results[0]
+                        data: results[0],
+                        user: req.user
                     })
                 })
                 //console.log(rows)
@@ -216,6 +223,7 @@ app.post('/appointmentBook', (req,res) =>{
 
             });
 })
+
 
 
 app.post('/find', async (req, res) => {
@@ -229,6 +237,7 @@ app.post('/find', async (req, res) => {
                 res.render("searchedDoctors", {
                     title: "Doctor",
                     data: results,
+                    user: req.user
                 })
             })
         }
@@ -249,6 +258,7 @@ app.post('/find', async (req, res) => {
                 res.render("searchedDoctors", {
                     title: "Doctor",
                     data: final_arr,
+                    user: req.user
                 })
             }
             else {
@@ -260,6 +270,7 @@ app.post('/find', async (req, res) => {
                     res.render("searchedDoctors", {
                         title: "Doctor",
                         data: results,
+                        user: req.user
                     })
 
                 });
@@ -277,6 +288,7 @@ app.post('/find', async (req, res) => {
                 res.render("searchedDoctors", {
                     title: "Hospital",
                     data: results,
+                    user: req.user
                 })
             })
         }
@@ -297,6 +309,7 @@ app.post('/find', async (req, res) => {
                 res.render("searchedDoctors", {
                     title: "Hospital",
                     data: final_arr,
+                    user: req.user
                 })
 
             }
@@ -309,6 +322,7 @@ app.post('/find', async (req, res) => {
                     res.render("searchedDoctors", {
                         title: "Hospital",
                         data: results,
+                        user: req.user
                     })
                 })
 
@@ -320,7 +334,14 @@ app.post('/find', async (req, res) => {
 })
 
 app.get('/', (req, res) => {
-    res.render("index");
+    //req.flash("errors",`this is a test`)
+    //res.redirect("/patient/login")
+    // req.session.admin = null
+    console.log(req.user)
+    // req.session.recep = null
+    res.render("index",{
+        user: req.user
+    });
 })
 
 // app.get('/doctors', (req, res) => {
@@ -347,6 +368,7 @@ app.get('/doctors', (req, res) => {
         res.render("doctors", {
             title: "Doctor",
             data: results,
+            user: req.user
         })
 
     });

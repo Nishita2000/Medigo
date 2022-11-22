@@ -2,13 +2,18 @@
     <!-- <div id="preloader">
         <img class="load" src="/img/preloader3.gif" alt="#">
     </div> -->
-    <%- include('./navigation') -%>
         <!-- END LOADER -->
 
         <div class="container-fluid py-4">
                 <div class="mx-6 my-4">
                     <a class="btn btn-primary" href="/admin/hospital" role="button">Hospital</a>
                     <a class="btn btn-primary" href="/admin/doctor" role="button">Doctor</a>
+                    <a class="btn btn-primary" href="/admin/change_pass" role="button">Change Password</a>
+                    <div class="pt-2">
+                        <form method="POST" action="/admin/logout">
+                            <button type="submit" class="btn btn-primary">Log out</button>
+                        </form>
+                    </div>
                 </div>
         </div>
         <!-- <a class="btn btn-primary" href="/admin/schedule" role="button">Schedule</a> -->

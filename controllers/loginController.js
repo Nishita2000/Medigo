@@ -79,10 +79,12 @@ const receptionistLoginPost = async (req, res) => {
                 bcrypt.compare(password, dbpassword, function (err, result) {
                     //console.log(result)
                     if (result) {
-                        console.log(info)
-                        res.render('receptionist_dashboard', {
-                            info
-                        })
+                        //console.log(info)
+                        req.session.recep = rows[0]
+                        //console.log(info)
+                        console.log('coco')
+                        console.log(req.session.recep)
+                        res.redirect('/receptionist/dashboard')
                     }
                     else {
                         res.render('receptionist_login', {
@@ -127,8 +129,10 @@ const adminLoginPost = async (req, res) => {
                 bcrypt.compare(password, dbpassword, function (err, result) {
                     //console.log(result)
                     if (result) {
-                        
-                        console.log(info)
+                        req.session.admin = rows[0]
+                        //console.log(info)
+                        //console.log('hehe')
+                        console.log(req.session.admin)
                         res.redirect('/admin')
                         // res.render('receptionist_dashboard', {
                         //     info
@@ -151,24 +155,52 @@ const adminLoginPost = async (req, res) => {
     });
 }
 
-let checkLoggedIn = (req, res, next) => {
-    if (!req.isAuthenticated()) {
-        return res.redirect("/receptionist/login");
+let checkLoggedInAdmin = (req, res, next) => {
+    if (!req.session.admin) {
+        return res.redirect("/admin/login");
     }
     next();
 };
 
-let checkLoggedOut = (req, res, next) => {
-    if (req.isAuthenticated()) {
+let checkLoggedOutAdmin = (req, res, next) => {
+    if (req.session.admin) {
+        return res.redirect("/admin");
+    }
+    next();
+};
+
+let postLogOutAdmin = (req, res) => {
+    req.session.admin = null;
+    console.log(req.session)
+    res.redirect("/");
+};
+
+let checkLoggedInRecep = (req, res, next) => {
+    if (!req.session.recep) {
+        return res.redirect("/receptionist/login");
+    }
+    // if (!req.isAuthenticated()) {
+    //     return res.redirect("/receptionist/login");
+    // }
+    next();
+};
+
+let checkLoggedOutRecep = (req, res, next) => {
+    if (req.session.recep) {
         return res.redirect("/receptionist/dashboard");
     }
     next();
 };
 
-let postLogOut = (req, res) => {
-    req.session.destroy(function (err) {
-        return res.redirect("/receptionist/login");
-    });
+let postLogOutRecep = (req, res) => {
+    // req.session.destroy(function (err) {
+    //     return res.redirect("/receptionist/login");
+    // });
+    // req.session.admin = 0
+    //console.log(req.session)
+    req.session.recep = null;
+    console.log(req.session)
+    res.redirect("/");
 };
 
 const patientLogin = (req, res) => {
@@ -225,9 +257,113 @@ let checkLoggedOutPatient = (req, res, next) => {
 
 let postLogOutPatient = (req, res) => {
     req.session.destroy(function (err) {
-        return res.redirect("/patient/login");
+        return res.redirect("/");
     });
 };
+
+const changePassPatient = async (req, res) => {
+    res.render('change_password', {
+        message : null
+    })
+}
+
+const changePassPatientPost = async (req, res) => {
+    const { oldpassword, password } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 10)
+    var id = req.user.patient_id
+    let sql = 'SELECT * from patient_info WHERE patient_id = ?'
+    let query = db.query(sql, [id], (err, rows) => {
+        if (err) throw err;
+        var dbpassword = rows[0].password;
+        //console.log(rows[0].password)
+        bcrypt.compare(oldpassword, dbpassword, function (err, result) {
+            //console.log(result)
+            if (result) {
+                let sql = 'UPDATE patient_info SET password = ? where patient_id = ?'
+                let query = db.query(sql, [hashedPassword,id], (err, rows) => {
+                    let message = encodeURIComponent('Password changed successfully');
+                    res.redirect('/patient/login/?added=' + message)
+                });
+               // req.session.admin = rows[0] 
+            }
+            else {
+                res.render('change_password', {
+                    message: "Password doesn't match"
+                })
+            }
+        });
+    });    
+}
+
+const changePassRecep = async (req, res) => {
+    res.render('change_password_recep', {
+        message: null
+    })
+}
+
+const changePassRecepPost = async (req, res) => {
+    const { oldpassword, password } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 10)
+    var id = req.session.recep.receptionist_id
+    let sql = 'SELECT * from receptionist_info WHERE receptionist_id = ?'
+    let query = db.query(sql, [id], (err, rows) => {
+        if (err) throw err;
+        var dbpassword = rows[0].password;
+        //console.log(rows[0].password)
+        bcrypt.compare(oldpassword, dbpassword, function (err, result) {
+            //console.log(result)
+            if (result) {
+                let sql = 'UPDATE receptionist_info SET password = ? where receptionist_id = ?'
+                let query = db.query(sql, [hashedPassword, id], (err, rows) => {
+                    req.session.recep = null
+                    let message = encodeURIComponent('Password changed successfully');
+                    res.redirect('/receptionist/login/?added=' + message)
+                });
+                // req.session.admin = rows[0] 
+            }
+            else {
+                res.render('change_password_recep', {
+                    message: "Password doesn't match"
+                })
+            }
+        });
+    });
+}
+
+const changePassAdmin = async (req, res) => {
+    res.render('change_password_admin', {
+        message: null
+    })
+}
+
+const changePassAdminPost = async (req, res) => {
+    const { oldpassword, password } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 10)
+    var id = req.session.admin.admin_id
+    let sql = 'SELECT * from admin_info WHERE admin_id = ?'
+    let query = db.query(sql, [id], (err, rows) => {
+        if (err) throw err;
+        var dbpassword = rows[0].password;
+        //console.log(rows[0].password)
+        bcrypt.compare(oldpassword, dbpassword, function (err, result) {
+            //console.log(result)
+            if (result) {
+                let sql = 'UPDATE admin_info SET password = ? where admin_id = ?'
+                let query = db.query(sql, [hashedPassword, id], (err, rows) => {
+                    req.session.admin = null
+                    let message = encodeURIComponent('Password changed successfully');
+                    res.redirect('/admin/login/?added=' + message)
+                });
+                // req.session.admin = rows[0] 
+            }
+            else {
+                res.render('change_password_admin', {
+                    message: "Password doesn't match"
+                })
+            }
+        });
+    });
+}
 
 module.exports = {
     receptionistLogin,
@@ -236,13 +372,22 @@ module.exports = {
     receptionistRegisterPost,
     adminLogin,
     adminLoginPost,
-    checkLoggedIn,
-    checkLoggedOut,
-    postLogOut,
+    checkLoggedInRecep,
+    checkLoggedOutRecep,
+    postLogOutRecep,
     patientLogin,
     patientRegister,
     patientRegisterPost,
     checkLoggedInPatient,
     checkLoggedOutPatient,
-    postLogOutPatient
+    postLogOutPatient,
+    postLogOutAdmin,
+    checkLoggedInAdmin,
+    checkLoggedOutAdmin,
+    changePassPatient,
+    changePassPatientPost,
+    changePassRecep,
+    changePassRecepPost,
+    changePassAdmin,
+    changePassAdminPost
 }

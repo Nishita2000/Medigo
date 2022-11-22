@@ -293,7 +293,7 @@ const adminDoctorDeleteAssigned = (req, res) => {
 
 const reciptionistView = (req, res) => {
     res.render('receptionist_view', {
-        //user : req.user
+        user : req.user
     });
     // let sql = 'SELECT * FROM receptionist_info WHERE receptionist_id = ?';
     // let query = db.query(sql, [req.params.id], (err, rows) => {
@@ -302,6 +302,12 @@ const reciptionistView = (req, res) => {
     //         row: rows[0]
     //     });
     // })
+}
+
+const patientView = (req, res) => {
+    res.render('patient_view', {
+        user: req.user
+    });
 }
 
 const adminDoctorAssignReceptionistView = (req, res) => {
@@ -324,7 +330,7 @@ const adminDoctorAssignReceptionist = (req, res) => {
     const { hospital_id, receptionist_id,doctor_id } = req.body;
     let sql2 = 'SELECT * FROM receptionist_info where hospital_id = ?';
     let query = db.query(sql2, [hospital_id], (err, receptionist_row) => {
-        let sql1 = 'SELECT EXISTS(SELECT * from receptionist_info WHERE receptionist_id = ? and hospital_id = ? and doctor_id = ?)'
+        let sql1 = 'SELECT EXISTS(SELECT * from receptionist_info WHERE receptioist_id = ? and hospital_id = ? and doctor_id = ?)'
         let query = db.query(sql1, [receptionist_id, hospital_id, doctor_id] , (err, rows) => {
             if (err) throw err;
             var string = JSON.stringify(rows);
@@ -385,6 +391,7 @@ module.exports = {
     adminDoctorDeleteAssigned,
     adminDoctorAssignReceptionistView,
     adminDoctorAssignReceptionist,
-    reciptionistView
+    reciptionistView,
+    patientView
 
 }

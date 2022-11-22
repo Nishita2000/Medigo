@@ -7754,7 +7754,15 @@ fieldset:disabled .btn {
     margin-right: 3rem !important;
     margin-left: 3rem !important
 }
+.mx-13{
+    margin-right: 3.5rem !important;
+    margin-left: 3.5rem !important
+}
 
+.mx-12 {
+    margin-right: 5rem !important;
+    margin-left: 5rem !important
+}
 .mx-6 {
     margin-left: 38.16rem !important
 }

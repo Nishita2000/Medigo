@@ -16,7 +16,7 @@ const initPassportLocal = require("../controllers/passportLocalController");
 
 //initPassportLocal();
 
-router.get('/admin', homeController.adminView);
+router.get('/admin', loginController.checkLoggedInAdmin, homeController.adminView);
 router.get('/admin/hospital', homeController.adminHospitalView);
 router.get('/admin/hospital/view', homeController.adminHospitalViewList);
 router.get('/admin/hospital/add', homeController.adminHospitalAddView);
@@ -38,8 +38,8 @@ router.post('/admin/doctor/assign', homeController.adminDoctorAssign)
 router.get('/admin/doctor/view_assigned', homeController.adminDoctorViewAssigned)
 router.get('/admin/doctor/view_assigned/delete/:doctor_id/:hospital_id', homeController.adminDoctorDeleteAssigned)
 
-//router.get('/receptionist/dashboard',  homePageController.getHomePage)
-router.get('/receptionist/login',  loginController.receptionistLogin)
+router.get('/receptionist/dashboard', loginController.checkLoggedInRecep, homePageController.getHomePage)
+router.get('/receptionist/login', loginController.checkLoggedOutRecep,  loginController.receptionistLogin)
 router.post('/receptionist/login', loginController.receptionistLoginPost)
 // router.post('/receptionist/login', passport.authenticate("local", {
 //     successRedirect: "/receptionist/dashboard",
@@ -49,11 +49,16 @@ router.post('/receptionist/login', loginController.receptionistLoginPost)
 // }));
 router.get('/receptionist/register', loginController.receptionistRegister)
 router.post('/receptionist/register', loginController.receptionistRegisterPost)
-router.post("/logout", loginController.postLogOut);
+router.post('/receptionist/logout', loginController.postLogOutRecep);
 //router.get('/receptionist/view', homeController.reciptionistView)
+router.get('/receptionist/change_pass', loginController.checkLoggedInRecep, loginController.changePassRecep)
+router.post('/receptionist/change_pass', loginController.changePassRecepPost)
+router.get('/admin/change_pass', loginController.checkLoggedInAdmin, loginController.changePassAdmin)
+router.post('/admin/change_pass', loginController.changePassAdminPost)
 
-router.get('/admin/login', loginController.adminLogin)
+router.get('/admin/login', loginController.checkLoggedOutAdmin, loginController.adminLogin)
 router.post('/admin/login', loginController.adminLoginPost)
+router.post('/admin/logout', loginController.postLogOutAdmin);
 
 
 

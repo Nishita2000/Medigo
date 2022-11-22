@@ -11,6 +11,8 @@ const initPassportPatientLocal = require("../controllers/patientPassportLocalCon
 //Init all passport
 initPassportPatientLocal();
 
+router.get('/patient/change_pass', loginController.checkLoggedInPatient, loginController.changePassPatient)
+router.post('/patient/change_pass', loginController.changePassPatientPost)
 router.get('/patient/dashboard', loginController.checkLoggedInPatient,homePageController.getHomePage2)
 router.get('/patient/login', loginController.checkLoggedOutPatient,loginController.patientLogin)
 router.post('/patient/login', passport.authenticate("local", {
@@ -20,7 +22,7 @@ router.post('/patient/login', passport.authenticate("local", {
     failureFlash: true,
     failureRedirect: "/patient/login", keepSessionInfo: true
 }), (req,res) => {
-    console.log(req.session); // doesnt have returnTo inside anymore ?
+    console.log(req.user); // doesnt have returnTo inside anymore ?
     res.redirect(req.session.returnTo || '/');
     delete req.session.returnTo;
 });

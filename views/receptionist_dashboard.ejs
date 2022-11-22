@@ -2,17 +2,21 @@
     <!-- <div id="preloader">
         <img class="load" src="/img/preloader3.gif" alt="#">
     </div> -->
-    <%- include('./navigation') -%>
+    
         <!-- END LOADER -->
-        <!-- <h1>I am <%=info[0].receptionist_name%> </h1> -->
-        <!-- <a class="btn btn-primary" href="/receptionist/view" role="button">View</a> -->
-        <!-- <div>
-            <form method="POST" action="/logout">
+        
+        <div class="col-12 text-center pt-3">
+            <a class="btn btn-primary" href="/viewPatient_doc_id=<%=info.doctor_id %>&hos_id=<%=info.hospital_id%>" role="button">View Patient</a>    
+        </div>
+
+        <div class="col-12 text-center pt-3">
+            <a class="btn btn-primary" href="/receptionist/change_pass" role="button">Change password</a>
+        </div>
+
+        <div class="col-12 text-center p-3">
+            <form method="POST" action="/receptionist/logout">
                 <button type="submit" class="btn btn-primary">Log out</button>
             </form>
-        </div> -->
-        <div class="col-12 text-center pt-3">
-            <a class="btn btn-primary" href="/viewPatient_doc_id=<%=info[0].doctor_id %>&hos_id=<%=info[0].hospital_id%>" role="button">View Patient</a>    
         </div>
 
 

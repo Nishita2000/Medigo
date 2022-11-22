@@ -1,5 +1,9 @@
 <%- include('./header') -%>
-    <%- include('./navigation') -%>
+    <% if(user){ %>
+        <%- include('./navigation_logout') -%>
+        <%} else{ %>
+            <%- include('./navigation') -%>
+                <%}%>
         <div class="container-fluid py-4">
             <div class="container">
                 <div class="row g-5">

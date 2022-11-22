@@ -1,17 +1,22 @@
 <%- include('./header') -%>
-    <%- include('./navigation') -%>
+<% if(user){ %>
+	<%- include('./navigation_logout') -%>
+	<%} else{ %>
+		<%- include('./navigation') -%>
+			<%}%>
     <!-- Page Content -->
 			<div class="content success-page-cont">
 				<div class="container-fluid">
 				
 					<div class="row justify-content-center">
-						<div class="col-lg-6">
+						<div class="col-lg-6 pt-5">
 						
 							<!-- Success Card -->
-							<div class="card success-card">
+							<div class="card success-card text-center">
 								<div class="card-body">
 									<div class="success-cont">
-										<i class="fas fa-check"></i>
+										<a class="btn btn-lg btn-primary btn-lg-square rounded-circle me-2" href="#"><i
+											class="fa fa-check"></i></a>
 										<h3>Appointment booked Successfully!</h3>
 										<p>Appointment booked with <strong><%=data.doctor_name%></strong><br> on <strong><%=data.app_date%> </strong><strong><%=data.time_slot%></strong> and serial number: <strong><%=data.serial%></strong></p>
 									</div>

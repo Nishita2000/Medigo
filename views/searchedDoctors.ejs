@@ -1,5 +1,9 @@
 <%- include('./header') -%>
-    <%- include('./navigation') -%>
+<% if(user){ %>
+    <%- include('./navigation_logout') -%>
+    <%} else{ %>
+        <%- include('./navigation') -%>
+            <%}%>
         <title>
             <%= title %>
         </title>
