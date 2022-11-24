@@ -272,7 +272,7 @@ app.get('/doctors', (req, res) => {
 })
 
 app.get('/hospital_navbar', (req, res) => {
-    let sql = `select hospital_id,name,Suburb,District,Specialization,description from hospital_info`;
+    let sql = `select hospital_id,name,Suburb,District,Specialization,description from hospital_info order by count_visit desc`;
                 let query = db.query(sql, (err, results) => {
                     if (err) throw err;
                     console.log(results);
