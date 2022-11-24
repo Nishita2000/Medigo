@@ -4,296 +4,272 @@
     </div>
     <% if(user){ %>
         <%- include('./navigation_logout') -%>
-        <%} else{ %>
-            <%- include('./navigation') -%>
-                <%}%>
-                    <!-- END LOADER -->
+            <%} else{ %>
+                <%- include('./navigation') -%>
+                    <%}%>
+                        <!-- END LOADER -->
 
-                    <!-- Hero Start -->
-                    <div class="container-fluid bg-primary py-5 mb-5 hero-header">
-                        <div class="container py-5">
-                            <div class="row justify-content-start">
-                                <div class="col-lg-8 text-center text-lg-start">
-                                    <h1 class="display-1 text-white mb-md-4">Best Healthcare Solution In Your City</h1>
-                                    <!--<div class="pt-2">
+                        <!-- Hero Start -->
+                        <div class="container-fluid bg-primary py-5 mb-5 hero-header">
+                            <div class="container py-5">
+                                <div class="row justify-content-start">
+                                    <div class="col-lg-8 text-center text-lg-start">
+                                        <h1 class="display-1 text-white mb-md-4">Best Healthcare Solution In Your City
+                                        </h1>
+                                        <!--<div class="pt-2">
                     <a href="" class="btn btn-light rounded-pill py-md-3 px-md-5 mx-2">Find Doctor</a>
                     <a href="" class="btn btn-outline-light rounded-pill py-md-3 px-md-5 mx-2">Appointment</a>
                 </div>-->
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- Hero End -->
+                        <!-- Hero End -->
 
-                    <!-- Search Start -->
-                    <div class="container-fluid  my-5">
-                        <div class="container bg-primary rounded py-5">
-                            <div class="row gx-5">
-                                <div class="col-lg-12">
-                                    <div class=" px-6">
-                                        <!--<h1 class="mb-4">Advanced Search</h1>-->
-                                        <!-- changed -->
-                                        <form autocomplete="off" action="http://localhost:3300/find" method="post">
-                                            <div class="row g-3">
-                                                <!--h3>Search based on your location?</h3-->
-                                                <!--h3>Search based on your location?</h3-->
-                                                <div class="col-6 col-sm-2 pt-2">
-                                                    <h6 class="mb-3">Search criteria</h6>
+                        <!-- Search Start -->
+                        <div class="container-fluid  my-5">
+                            <div class="container bg-primary rounded py-5">
+                                <div class="row gx-5">
+                                    <div class="col-lg-12">
+                                        <div class=" px-6">
+                                            <!--<h1 class="mb-4">Advanced Search</h1>-->
+                                            <!-- changed -->
+                                            <form autocomplete="off" action="http://localhost:3300/find" method="post">
+                                                <div class="row g-3">
+                                                    <!--h3>Search based on your location?</h3-->
+                                                    <!--h3>Search based on your location?</h3-->
+                                                    <div class="col-6 col-sm-2 pt-2">
+                                                        <h6 class="mb-3">Search criteria</h6>
+                                                    </div>
+                                                    <div class="text-dark col-3 col-sm-1 pt-2">
+                                                        <input type="radio" name="Criteria" id="precSearchDoc"
+                                                            value="Doctor"> Doctor
+                                                    </div>
+                                                    <div class="text-dark col-3 col-sm-14 pt-2">
+                                                        <input type="radio" name="Criteria" id="precSearchPubHos"
+                                                            value="Govt."> Govt.
+                                                        Hospital
+                                                    </div>
+                                                    <div class="text-dark col-3 col-sm-15 pt-2">
+                                                        <input type="radio" name="Criteria" id="precSearchPriHos"
+                                                            value="Private">
+                                                        Private Hospital
+                                                    </div>
                                                 </div>
-                                                <div class="text-dark col-3 col-sm-1 pt-2">
-                                                    <input type="radio" name="Criteria" id="precSearchDoc"
-                                                        value="Doctor"> Doctor
+                                                <div class="row g-3 ">
+                                                    <div class="col-6 col-sm-2 pt-1">
+                                                        <h6 class="mb-3">Find specific</h6>
+                                                    </div>
+                                                    <div class="text-dark col-6 col-sm-1 pt-1">
+                                                        <input type="radio" name="Precise" id="precSearchYes"
+                                                            value="Yes" onclick="Enableprec();">
+                                                        Yes
+                                                    </div>
+                                                    <div class="text-dark col-6 col-sm-1 pt-1">
+                                                        <input type="radio" name="Precise" id="precSearchNo" value="No"
+                                                            checked onclick="Enableprec();">
+                                                        No
+                                                    </div>
+                                                    <!--changed-->
+                                                    <div class="autoComplete col-7 col-sm-7 mx-auto px-5">
+                                                        <input type="text-dark" class="form-control bg-light border-0"
+                                                            style=" height: 45px;"
+                                                            placeholder="Name of hospital/clinic/doctor"
+                                                            name="preciseSearch" id="precSearch" disabled="disabled">
+                                                    </div>
                                                 </div>
-                                                <div class="text-dark col-3 col-sm-14 pt-2">
-                                                    <input type="radio" name="Criteria" id="precSearchPubHos"
-                                                        value="Govt."> Govt.
-                                                    Hospital
-                                                </div>
-                                                <div class="text-dark col-3 col-sm-15 pt-2">
-                                                    <input type="radio" name="Criteria" id="precSearchPriHos"
-                                                        value="Private">
-                                                    Private Hospital
-                                                </div>
-                                            </div>
-                                            <div class="row g-3 ">
-                                                <div class="col-6 col-sm-2 pt-1">
-                                                    <h6 class="mb-3">Find specific</h6>
-                                                </div>
-                                                <div class="text-dark col-6 col-sm-1 pt-1">
-                                                    <input type="radio" name="Precise" id="precSearchYes" value="Yes"
-                                                        onclick="Enableprec();">
-                                                    Yes
-                                                </div>
-                                                <div class="text-dark col-6 col-sm-1 pt-1">
-                                                    <input type="radio" name="Precise" id="precSearchNo" value="No"
-                                                        checked onclick="Enableprec();">
-                                                    No
-                                                </div>
-                                                <!--changed-->
-                                                <div class="autoComplete col-7 col-sm-7 mx-auto px-5">
-                                                    <input type="text-dark" class="form-control bg-light border-0"
-                                                        style=" height: 45px;"
-                                                        placeholder="Name of hospital/clinic/doctor"
-                                                        name="preciseSearch" id="precSearch" disabled="disabled">
-                                                </div>
-                                            </div>
-                                            <div class="row g-3 ">
-                                                <!--h3>Search based on your location?</h3-->
+                                                <div class="row g-3 ">
+                                                    <!--h3>Search based on your location?</h3-->
 
-                                                <div class="col-6 col-sm-2">
-                                                    <h6 class="mb-3">Find near me</h6>
-                                                    <input type="hidden" name="hideLoc" id="hiddenSuburb" value=" ">
-                                                    <input type="hidden" name="hideLoc" id="hiddenStateDistrict"
-                                                        value=" ">
-                                                    <input type="hidden" name="hideLoc" id="hiddenState" value=" ">
+                                                    <div class="col-6 col-sm-2">
+                                                        <h6 class="mb-3">Find near me</h6>
+                                                        <input type="hidden" name="hideLoc" id="hiddenSuburb" value=" ">
+                                                        <input type="hidden" name="hideLoc" id="hiddenStateDistrict"
+                                                            value=" ">
+                                                        <input type="hidden" name="hideLoc" id="hiddenState" value=" ">
+                                                    </div>
+                                                    <div class="text-dark col-6 col-sm-1">
+                                                        <input type="radio" name="Location" id="locationYes" value="Yes"
+                                                            onclick="getLocation();"> Yes
+                                                    </div>
+                                                    <div class="text-dark col-6 col-sm-1">
+                                                        <input type="radio" name="Location" id="locationNo" value="No">
+                                                        No
+                                                    </div>
                                                 </div>
-                                                <div class="text-dark col-6 col-sm-1">
-                                                    <input type="radio" name="Location" id="locationYes" value="Yes"
-                                                        onclick="getLocation();"> Yes
-                                                </div>
-                                                <div class="text-dark col-6 col-sm-1">
-                                                    <input type="radio" name="Location" id="locationNo" value="No">
-                                                    No
-                                                </div>
-                                            </div>
-                                            <div class="row g-3">
-                                                <div class="col-12 col-sm-2">
-                                                    <h6 class="mb-3">Specialization </h6>
-                                                </div>
-                                                <div class="text-dark col-6 col-sm-2">
-                                                    <input type="radio" name="specialized" id="Option-1" value="Cancer">
-                                                    Cancer
-                                                </div>
-                                                <div class="text-dark col-6 col-sm-2">
-                                                    <input type="radio" name="specialized" id="Option-2" value="Heart">
-                                                    Heart
-                                                </div>
-                                                <div class="text-dark col-6 col-sm-2">
-                                                    <input type="radio" name="specialized" id="Option-3" value="ENT">
-                                                    ENT
-                                                </div>
-                                                <div class="text-dark col-6 col-sm-2">
-                                                    <input type="radio" name="specialized" id="Option-4" value="Eye">
-                                                    Eye
-                                                </div>
-                                                <div class="text-dark col-6 col-sm-2">
-                                                    <input type="radio" name="specialized" id="Option-5"
-                                                        value="General">
-                                                    General
-                                                </div>
+                                                <div class="row g-3">
+                                                    <div class="col-12 col-sm-2">
+                                                        <h6 class="mb-3">Specialization </h6>
+                                                    </div>
+                                                    <div class="text-dark col-6 col-sm-2">
+                                                        <input type="radio" name="specialized" id="Option-1"
+                                                            value="Cancer">
+                                                        Cancer
+                                                    </div>
+                                                    <div class="text-dark col-6 col-sm-2">
+                                                        <input type="radio" name="specialized" id="Option-2"
+                                                            value="Heart">
+                                                        Heart
+                                                    </div>
+                                                    <div class="text-dark col-6 col-sm-2">
+                                                        <input type="radio" name="specialized" id="Option-3"
+                                                            value="ENT">
+                                                        ENT
+                                                    </div>
+                                                    <div class="text-dark col-6 col-sm-2">
+                                                        <input type="radio" name="specialized" id="Option-4"
+                                                            value="Eye">
+                                                        Eye
+                                                    </div>
+                                                    <div class="text-dark col-6 col-sm-2">
+                                                        <input type="radio" name="specialized" id="Option-5"
+                                                            value="General">
+                                                        General
+                                                    </div>
 
-                                            </div>
-                                            <div class="pt-3">
-                                                <button class="btn btn-primary w-50 py-md-3 px-md-5 mx-9" type="submit"
-                                                    id="searchButton">Search</button>
-                                                <!--btn btn-light rounded-pill py-md-3 px-md-5 mx-7-->
-                                            </div>
-                                        </form>
+                                                </div>
+                                                <div class="pt-3">
+                                                    <button class="btn btn-primary w-50 py-md-3 px-md-5 mx-9"
+                                                        type="submit" id="searchButton">Search</button>
+                                                    <!--btn btn-light rounded-pill py-md-3 px-md-5 mx-7-->
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
-                                </div>
 
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- Search End -->
+                        <!-- Search End -->
 
-                    <!-- About Start -->
-                    <div class="container-fluid pt-3">
-                        <div class="container">
-                            <div class="row gx-5">
-                                <div class="col-lg-5 mb-5 mb-lg-0" style="min-height: 500px;">
-                                    <div class="position-relative h-100">
-                                        <img class="position-absolute w-100 h-100 rounded" src="/img/medical-care.jpg"
-                                            style="object-fit: cover;">
+                        <!-- About Start -->
+                        <div class="container-fluid pt-3">
+                            <div class="container">
+                                <div class="row gx-5">
+                                    <div class="col-lg-5 mb-5 mb-lg-0" style="min-height: 500px;">
+                                        <div class="position-relative h-100">
+                                            <img class="position-absolute w-100 h-100 rounded"
+                                                src="/img/medical-care.jpg" style="object-fit: cover;">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-7">
-                                    <div class="mb-4">
-                                        <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5">
-                                            About Us</h5>
-                                        <h1 class="display-4">Best Medical Care For Yourself and Your Family</h1>
-                                    </div>
-                                    <p>Tempor erat elitr at rebum at at clita aliquyam consetetur. Diam dolor diam ipsum
-                                        et, tempor
-                                        voluptua sit consetetur sit. Aliquyam diam amet diam et eos sadipscing labore.
-                                        Clita erat
-                                        ipsum
-                                        et lorem et sit, sed stet no labore lorem sit. Sanctus clita duo justo et tempor
-                                        consetetur
-                                        takimata eirmod, dolores takimata consetetur invidunt magna dolores aliquyam
-                                        dolores dolore.
-                                        Amet erat amet et magna</p>
-                                    <div class="row g-3 pt-3">
-                                        <div class="col-sm-3 col-6">
-                                            <div class="bg-light text-center rounded-circle py-4">
-                                                <i class="fa fa-3x fa-user-md text-primary mb-3"></i>
-                                                <h6 class="mb-0">Qualified<small
-                                                        class="d-block text-primary">Doctors</small></h6>
-                                            </div>
+                                    <div class="col-lg-7">
+                                        <div class="mb-4">
+                                            <h5
+                                                class="d-inline-block text-primary text-uppercase border-bottom border-5">
+                                                About Us</h5>
+                                            <h1 class="display-4">Best Medical Care For Yourself and Your Family</h1>
                                         </div>
-                                        <div class="col-sm-3 col-6">
-                                            <div class="bg-light text-center rounded-circle py-4">
-                                                <i class="fa fa-3x fa-hospital text-primary mb-3"></i>
-                                                <h6 class="mb-0">Popular<small
-                                                        class="d-block text-primary">Hospitals</small></h6>
+                                        <p>Tempor erat elitr at rebum at at clita aliquyam consetetur. Diam dolor diam
+                                            ipsum
+                                            et, tempor
+                                            voluptua sit consetetur sit. Aliquyam diam amet diam et eos sadipscing
+                                            labore.
+                                            Clita erat
+                                            ipsum
+                                            et lorem et sit, sed stet no labore lorem sit. Sanctus clita duo justo et
+                                            tempor
+                                            consetetur
+                                            takimata eirmod, dolores takimata consetetur invidunt magna dolores aliquyam
+                                            dolores dolore.
+                                            Amet erat amet et magna</p>
+                                        <div class="row g-3 pt-3">
+                                            <div class="col-sm-3 col-6">
+                                                <div class="bg-light text-center rounded-circle py-4">
+                                                    <i class="fa fa-3x fa-user-md text-primary mb-3"></i>
+                                                    <h6 class="mb-0">Qualified<small
+                                                            class="d-block text-primary">Doctors</small></h6>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-sm-3 col-6">
-                                            <div class="bg-light text-center rounded-circle py-4">
-                                                <i class="fa fa-3x fa-clinic-medical text-primary mb-3"></i>
-                                                <h6 class="mb-0">Popular<small
-                                                        class="d-block text-primary">Clinics</small></h6>
+                                            <div class="col-sm-3 col-6">
+                                                <div class="bg-light text-center rounded-circle py-4">
+                                                    <i class="fa fa-3x fa-hospital text-primary mb-3"></i>
+                                                    <h6 class="mb-0">Popular<small
+                                                            class="d-block text-primary">Hospitals</small></h6>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-sm-3 col-6">
-                                            <div class="bg-light text-center rounded-circle py-4">
-                                                <i class="fa fa-3x fa-microscope text-primary mb-3"></i>
-                                                <h6 class="mb-0">Accurate<small
-                                                        class="d-block text-primary">Testing</small></h6>
+                                            <div class="col-sm-3 col-6">
+                                                <div class="bg-light text-center rounded-circle py-4">
+                                                    <i class="fa fa-3x fa-clinic-medical text-primary mb-3"></i>
+                                                    <h6 class="mb-0">Popular<small
+                                                            class="d-block text-primary">Clinics</small></h6>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <!--<div class="col-sm-3 col-6">
+                                            <div class="col-sm-3 col-6">
+                                                <div class="bg-light text-center rounded-circle py-4">
+                                                    <i class="fa fa-3x fa-microscope text-primary mb-3"></i>
+                                                    <h6 class="mb-0">Accurate<small
+                                                            class="d-block text-primary">Testing</small></h6>
+                                                </div>
+                                            </div>
+                                            <!--<div class="col-sm-3 col-6">
                             <div class="bg-light text-center rounded-circle py-4">
                                 <i class="fa fa-3x fa-ambulance text-primary mb-3"></i>
                                 <h6 class="mb-0">Free<small class="d-block text-primary">Ambulance</small></h6>
                             </div>
                         </div>-->
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- About End -->
+                        <!-- About End -->
 
-                    <!-- Doctor Start 
-        <div class="container-fluid pt-6">
-            <div class="container">
-                <div class="text-center mx-auto mb-5" style="max-width: 500px;">
-                    <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5">Our Doctors</h5>
-                    <h1 class="display-4">Qualified Healthcare Professionals</h1>
-                </div>
-                <div class="owl-carousel team-carousel position-relative">
-                    <div class="team-item">
-                        <div class="row g-0 bg-light rounded overflow-hidden">
-                            <div class="col-12 col-sm-5 h-100">
-                                <img class="img-fluid h-100" src="/img/team-1.jpg" style="object-fit: cover;">
-                            </div>
-                            <div class="col-12 col-sm-7 h-100 d-flex flex-column">
-                                <div class="mt-auto p-4">
-                                    <h3>Doctor Name</h3>
-                                    <h6 class="fw-normal fst-italic text-primary mb-4">Cardiology Specialist</h6>
-                                    <p class="m-0">Dolor lorem eos dolor duo eirmod sea. Dolor sit magna rebum clita
-                                        rebum
-                                        dolor</p>
+                        <!-- Doctor Start  -->
+                        <div class="container-fluid pt-6">
+                            <div class="container">
+                                <div class="text-center mx-auto mb-5" style="max-width: 500px;">
+                                    <h5 class="d-inline-block text-primary text-uppercase border-bottom border-5">Our
+                                        Doctors</h5>
+                                    <h1 class="display-4">Qualified Healthcare Professionals</h1>
                                 </div>
-                                <div class="d-flex mt-auto border-top p-4">
-                                    <a class="btn btn-lg btn-primary btn-lg-square rounded-circle me-3" href="#"><i
-                                            class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-lg btn-primary btn-lg-square rounded-circle me-3" href="#"><i
-                                            class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-lg btn-primary btn-lg-square rounded-circle" href="#"><i
-                                            class="fab fa-linkedin-in"></i></a>
+                                <div class="owl-carousel team-carousel position-relative">
+                                    <% if(data.length> 0){ %>
+                                        <% data.forEach(function(row){ %>
+                                            <div class="team-item">
+                                                <div class="row g-0 bg-light rounded overflow-hidden">
+                                                    <div class="col-12 col-sm-5 h-100">
+                                                        <img class="img-fluid h-100" src="img/team-1.jpg"
+                                                            style="object-fit: cover;">
+                                                    </div>
+                                                    <div class="col-12 col-sm-7 h-100 d-flex flex-column">
+                                                        <div class="mt-auto p-4">
+                                                            <h3>
+                                                                <%= row.doctor_name %>
+                                                            </h3>
+                                                            <h6 class="fw-normal fst-italic text-primary mb-4">
+                                                                <%= row.degree %>
+                                                            </h6>
+                                                            <h6 class="fw-normal fst-italic text-primary">
+                                                                <%= row.hospital_name%>, <%= row.Suburb%>, <%=
+                                                                            row.District%>
+                                                            </h6>
+                                                            <h6 class="fw-normal fst-italic text-primary mb-4">
+                                                                <%= row.email %>
+                                                            </h6>
+                                                            <h6 class="fw-normal fst-italic text-primary mb-4">
+                                                                <%= row.year_of_experience %> years of Experience
+                                                            </h6>
+                                                        </div>
+                                                        <div class="d-flex mt-auto border-top p-2">
+                                                            <div class="col-12 text-center">
+                                                                <a class="btn btn-primary"
+                                                                    href="/viewProfile_doc_id=<%=row.doctor_id %>&hos_id=<%=row.hospital_id%>"
+                                                                    role="button">View Info</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <% })}%>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="team-item">
-                        <div class="row g-0 bg-light rounded overflow-hidden">
-                            <div class="col-12 col-sm-5 h-100">
-                                <img class="img-fluid h-100" src="/img/team-2.jpg" style="object-fit: cover;">
-                            </div>
-                            <div class="col-12 col-sm-7 h-100 d-flex flex-column">
-                                <div class="mt-auto p-4">
-                                    <h3>Doctor Name</h3>
-                                    <h6 class="fw-normal fst-italic text-primary mb-4">Cardiology Specialist</h6>
-                                    <p class="m-0">Dolor lorem eos dolor duo eirmod sea. Dolor sit magna rebum clita
-                                        rebum
-                                        dolor</p>
-                                </div>
-                                <div class="d-flex mt-auto border-top p-4">
-                                    <a class="btn btn-lg btn-primary btn-lg-square rounded-circle me-3" href="#"><i
-                                            class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-lg btn-primary btn-lg-square rounded-circle me-3" href="#"><i
-                                            class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-lg btn-primary btn-lg-square rounded-circle" href="#"><i
-                                            class="fab fa-linkedin-in"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="team-item">
-                        <div class="row g-0 bg-light rounded overflow-hidden">
-                            <div class="col-12 col-sm-5 h-100">
-                                <img class="img-fluid h-100" src="/img/team-3.jpg" style="object-fit: cover;">
-                            </div>
-                            <div class="col-12 col-sm-7 h-100 d-flex flex-column">
-                                <div class="mt-auto p-4">
-                                    <h3>Doctor Name</h3>
-                                    <h6 class="fw-normal fst-italic text-primary mb-4">Cardiology Specialist</h6>
-                                    <p class="m-0">Dolor lorem eos dolor duo eirmod sea. Dolor sit magna rebum clita
-                                        rebum
-                                        dolor</p>
-                                </div>
-                                <div class="d-flex mt-auto border-top p-4">
-                                    <a class="btn btn-lg btn-primary btn-lg-square rounded-circle me-3" href="#"><i
-                                            class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-lg btn-primary btn-lg-square rounded-circle me-3" href="#"><i
-                                            class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-lg btn-primary btn-lg-square rounded-circle" href="#"><i
-                                            class="fab fa-linkedin-in"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        Doctor End -->
+                        <!-- Doctor End -->
 
 
-                    <script src="/location.js"></script>
-                    <script src="/specificSearch.js"></script>
-                    <script src="/autoComplete.js"></script>
+                        <script src="/location.js"></script>
+                        <script src="/specificSearch.js"></script>
+                        <script src="/autoComplete.js"></script>
 
 
-                    <%- include('./footer') -%>
+                        <%- include('./footer') -%>

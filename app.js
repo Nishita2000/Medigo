@@ -57,108 +57,6 @@ app.post('/patient/logout', (req,res)=>{
     });
 })
 
-//let {city}=allDetails;
-
-// app.post('/find', async (req, res) => {
-//     console.log(JSON.stringify(req.body));
-//     var arr = [];
-//     if (req.body.Criteria == 'Doctor') {
-//         if (req.body.Precise == 'Yes') {
-//             let sql = `select doctor_info.name as doctor_name,doctor_info.specialty,doctor_info.email,hospital_info.name as hospital_name,Suburb,District from doctor_info,hospital_info where doctor_info.name like'%${req.body.preciseSearch}%' and doctor_info.hospital_id=hospital_info.hospital_id`;
-//             let query = db.query(sql, (err, results) => {
-//                 if (err) throw err;
-//                 res.render("searchedDoctors", {
-//                     title: "Doctor",
-//                     data: results,
-//                 })
-//             })
-//         }
-//         else {
-//             if (req.body.Location == 'Yes') {
-//                 //console.log("YES");
-//                 //let sql = `select doctor_info.name as doctor_name,hospital_info.name as hospital_name from doctor_info,hospital_info where specialty='${req.body.specialized}' and (Suburb='${req.body.hideLoc[0]}' or (District='${req.body.hideLoc[1]}' and Suburb!='${req.body.hideLoc[0]}') or (Division='${req.body.hideLoc[2]}' and Suburb!='${req.body.hideLoc[0]}' and District!='${req.body.hideLoc[1]}')) and doctor_info.hospital_id=hospital_info.hospital_id`;
-//                 let sql = `select doctor_info.name as doctor_name,specialty,email,hospital_info.name as hospital_name,Suburb,District from doctor_info,hospital_info where specialty='${req.body.specialized}' and Suburb='${req.body.hideLoc[0]}' and doctor_info.hospital_id=hospital_info.hospital_id`;
-//                 let sql1 = `select doctor_info.name as doctor_name,specialty,email,hospital_info.name as hospital_name,Suburb,District from doctor_info,hospital_info where specialty='${req.body.specialized}' and (District='${req.body.hideLoc[1]}' and Suburb!='${req.body.hideLoc[0]}') and doctor_info.hospital_id=hospital_info.hospital_id`;
-//                 let sql2 = `select doctor_info.name as doctor_name,specialty,email,hospital_info.name as hospital_name,Suburb,District from doctor_info,hospital_info where specialty='${req.body.specialized}' and (Division='${req.body.hideLoc[2]}' and Suburb!='${req.body.hideLoc[0]}' and District!='${req.body.hideLoc[1]}') and doctor_info.hospital_id=hospital_info.hospital_id`;
-//                 // let sql = `select * from hospital_info where District='${req.body.hideLoc[1]}'`;
-//                 let final_arr = [];
-//                 final_arr = final_arr.concat(await getResult(sql));
-//                 final_arr = final_arr.concat(await getResult(sql1));
-//                 final_arr = final_arr.concat(await getResult(sql2));
-//                 //console.log(results);
-//                 console.log(final_arr);
-//                 res.render("searchedDoctors", {
-//                     title: "Doctor",
-//                     data: final_arr,
-//                 })
-//             }
-//             else {
-//                 let sql = `select doctor_info.name as doctor_name,specialty,email,hospital_info.name as hospital_name,Suburb,District from doctor_info,hospital_info where specialty='${req.body.specialized}' and doctor_info.hospital_id=hospital_info.hospital_id`;
-//                 let query = db.query(sql, (err, results) => {
-//                     if (err) throw err;
-//                     console.log(results);
-//                     //res.send(results);
-//                     res.render("searchedDoctors", {
-//                         title: "Doctor",
-//                         data: results,
-//                     })
-
-//                 });
-//             }
-//         }
-
-//     }
-//     else {
-//         if (req.body.Precise == 'Yes') {
-//             let sql = `select name,suburb,district,specialization from hospital_info where name like'%${req.body.preciseSearch}%' and type='${req.body.Criteria}'`;
-//             let query = db.query(sql, (err, results) => {
-//                 if (err) throw err;
-//                 console.log(results);
-//                 // res.send(results);
-//                 res.render("searchedDoctors", {
-//                     title: "Hospital",
-//                     data: results,
-//                 })
-//             })
-//         }
-//         else {
-//             if (req.body.Location == 'Yes') {
-//                 //console.log("YES");
-//                 //let sql = `select doctor_info.name as doctor_name,hospital_info.name as hospital_name from doctor_info,hospital_info where specialty='${req.body.specialized}' and (Suburb='${req.body.hideLoc[0]}' or (District='${req.body.hideLoc[1]}' and Suburb!='${req.body.hideLoc[0]}') or (Division='${req.body.hideLoc[2]}' and Suburb!='${req.body.hideLoc[0]}' and District!='${req.body.hideLoc[1]}')) and doctor_info.hospital_id=hospital_info.hospital_id`;
-//                 let sql = `select name,Suburb,District,Specialization from hospital_info where Specialization='${req.body.specialized}' and type='${req.body.Criteria}' and Suburb='${req.body.hideLoc[0]}'`;
-//                 let sql1 = `select name,Suburb,District,Specialization from hospital_info where Specialization='${req.body.specialized}' and type='${req.body.Criteria}' and (District='${req.body.hideLoc[1]}' and Suburb!='${req.body.hideLoc[0]}')`;
-//                 let sql2 = `select name,Suburb,District,Specialization from hospital_info where Specialization='${req.body.specialized}' and type='${req.body.Criteria}' and (Division='${req.body.hideLoc[2]}' and Suburb!='${req.body.hideLoc[0]}' and District!='${req.body.hideLoc[1]}')`;
-//                 // let sql = `select * from hospital_info where District='${req.body.hideLoc[1]}'`;
-//                 let final_arr = [];
-//                 final_arr = final_arr.concat(await getResult(sql));
-//                 final_arr = final_arr.concat(await getResult(sql1));
-//                 final_arr = final_arr.concat(await getResult(sql2));
-//                 //console.log(results);
-//                 console.log(final_arr);
-//                 res.render("searchedDoctors", {
-//                     title: "Hospital",
-//                     data: final_arr,
-//                 })
-
-//             }
-//             else {
-//                 let sql = `select name,Suburb,District,Specialization from hospital_info where Specialization='${req.body.specialized}' and type='${req.body.Criteria}'`;
-//                 let query = db.query(sql, (err, results) => {
-//                     if (err) throw err;
-//                     console.log(results);
-//                     // res.send(results);
-//                     res.render("searchedDoctors", {
-//                         title: "Hospital",
-//                         data: results,
-//                     })
-//                 })
-
-//             }
-
-//         }
-
-//     }
-// })
 
 app.get('/viewPatient_doc_id=:did&hos_id=:hid', (req,res) => {
     console.log(req.params);
@@ -344,22 +242,8 @@ app.get('/', (req, res) => {
     });
 })
 
-// app.get('/doctors', (req, res) => {
-//     let sql = `select doctor_info.name as doctor_name,specialty,email,hospital_info.name as hospital_name,Suburb,District from doctor_info,hospital_info where doctor_info.hospital_id=hospital_info.hospital_id`;
-//     let query = db.query(sql, (err, results) => {
-//         if (err) throw err;
-//         console.log(results);
-//         //res.send(results);
-//         res.render("doctors", {
-//             title: "Doctor",
-//             data: results,
-//         })
-
-//     });
-//     //res.render("doctors", {});
-// })
 app.get('/doctors', (req, res) => {
-    let sql = `select doctor_info.doctor_id,hospital_info.hospital_id,doctor_info.name as doctor_name,year_of_experience,specialty,email,hospital_info.name as hospital_name,Suburb,District,designation,degree,visit_fee from doctor_info,hospital_info,doctor_hospital where doctor_hospital.hospital_id=hospital_info.hospital_id and doctor_hospital.doctor_id=doctor_info.doctor_id`;
+    let sql = `select doctor_info.doctor_id,hospital_info.hospital_id,doctor_info.name as doctor_name,year_of_experience,specialty,email,hospital_info.name as hospital_name,Suburb,District,designation,degree,visit_fee from doctor_info,hospital_info,doctor_hospital where doctor_hospital.hospital_id=hospital_info.hospital_id and doctor_hospital.doctor_id=doctor_info.doctor_id order by visit_count desc`;
     //let sql = `select doctor_info.name as doctor_name,specialty,email,hospital_info.name as hospital_name,Suburb,District,designation,degree,visit_fee from doctor_info,hospital_info,doctor_hospital where doctor_name=(Select distinct doctor_info.name as doctor_name from doctor_info,hospital_info,doctor_hospital where doctor_hospital.hospital_id=hospital_info.hospital_id and doctor_hospital.doctor_id=doctor_info.doctor_id)`;
     let query = db.query(sql, (err, results) => {
         if (err) throw err;
