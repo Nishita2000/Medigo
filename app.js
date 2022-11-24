@@ -178,7 +178,7 @@ app.post('/find', async (req, res) => {
     }
     else {
         if (req.body.Precise == 'Yes') {
-            let sql = `select hospital_info.hospital_id,name,Suburb,District,Specialization from hospital_info where name like'%${req.body.preciseSearch}%' and type='${req.body.Criteria}'`;
+            let sql = `select hospital_info.hospital_id,name,Suburb,District,Specialization,description from hospital_info where name like'%${req.body.preciseSearch}%' and type='${req.body.Criteria}'`;
             let query = db.query(sql, (err, results) => {
                 if (err) throw err;
                 console.log(results);
@@ -194,9 +194,9 @@ app.post('/find', async (req, res) => {
             if (req.body.Location == 'Yes') {
                 //console.log("YES");
                 //let sql = `select doctor_info.name as doctor_name,hospital_info.name as hospital_name from doctor_info,hospital_info where specialty='${req.body.specialized}' and (Suburb='${req.body.hideLoc[0]}' or (District='${req.body.hideLoc[1]}' and Suburb!='${req.body.hideLoc[0]}') or (Division='${req.body.hideLoc[2]}' and Suburb!='${req.body.hideLoc[0]}' and District!='${req.body.hideLoc[1]}')) and doctor_info.hospital_id=hospital_info.hospital_id`;
-                let sql = `select hospital_info.hospital_id,name,Suburb,District,Specialization from hospital_info where Specialization='${req.body.specialized}' and type='${req.body.Criteria}' and Suburb='${req.body.hideLoc[0]}'`;
-                let sql1 = `select hospital_info.hospital_id,name,Suburb,District,Specialization from hospital_info where Specialization='${req.body.specialized}' and type='${req.body.Criteria}' and (District='${req.body.hideLoc[1]}' and Suburb!='${req.body.hideLoc[0]}')`;
-                let sql2 = `select hospital_info.hospital_id,name,Suburb,District,Specialization from hospital_info where Specialization='${req.body.specialized}' and type='${req.body.Criteria}' and (Division='${req.body.hideLoc[2]}' and Suburb!='${req.body.hideLoc[0]}' and District!='${req.body.hideLoc[1]}')`;
+                let sql = `select hospital_info.hospital_id,name,Suburb,District,Specialization,description from hospital_info where Specialization='${req.body.specialized}' and type='${req.body.Criteria}' and Suburb='${req.body.hideLoc[0]}'`;
+                let sql1 = `select hospital_info.hospital_id,name,Suburb,District,Specialization,description from hospital_info where Specialization='${req.body.specialized}' and type='${req.body.Criteria}' and (District='${req.body.hideLoc[1]}' and Suburb!='${req.body.hideLoc[0]}')`;
+                let sql2 = `select hospital_info.hospital_id,name,Suburb,District,Specialization,description from hospital_info where Specialization='${req.body.specialized}' and type='${req.body.Criteria}' and (Division='${req.body.hideLoc[2]}' and Suburb!='${req.body.hideLoc[0]}' and District!='${req.body.hideLoc[1]}')`;
                 // let sql = `select * from hospital_info where District='${req.body.hideLoc[1]}'`;
                 let final_arr = [];
                 final_arr = final_arr.concat(await getResult(sql));
@@ -212,7 +212,7 @@ app.post('/find', async (req, res) => {
 
             }
             else {
-                let sql = `select hospital_info.hospital_id,name,Suburb,District,Specialization from hospital_info where Specialization='${req.body.specialized}' and type='${req.body.Criteria}'`;
+                let sql = `select hospital_info.hospital_id,name,Suburb,District,Specialization,description from hospital_info where Specialization='${req.body.specialized}' and type='${req.body.Criteria}'`;
                 let query = db.query(sql, (err, results) => {
                     if (err) throw err;
                     console.log(results);
