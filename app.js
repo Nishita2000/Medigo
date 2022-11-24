@@ -271,6 +271,22 @@ app.get('/doctors', (req, res) => {
     //res.render("doctors", {});
 })
 
+app.get('/hospital_navbar', (req, res) => {
+    let sql = `select doctor_info.doctor_id,hospital_info.hospital_id,doctor_info.name as doctor_name,year_of_experience,specialty,email,hospital_info.name as hospital_name,Suburb,District,designation,degree,visit_fee from doctor_info,hospital_info,doctor_hospital where doctor_hospital.hospital_id=hospital_info.hospital_id and doctor_hospital.doctor_id=doctor_info.doctor_id`;
+    //let sql = `select doctor_info.name as doctor_name,specialty,email,hospital_info.name as hospital_name,Suburb,District,designation,degree,visit_fee from doctor_info,hospital_info,doctor_hospital where doctor_name=(Select distinct doctor_info.name as doctor_name from doctor_info,hospital_info,doctor_hospital where doctor_hospital.hospital_id=hospital_info.hospital_id and doctor_hospital.doctor_id=doctor_info.doctor_id)`;
+    let query = db.query(sql, (err, results) => {
+        if (err) throw err;
+        console.log(results);
+        //res.send(results);
+        res.render("hospital_navbar", {
+            data: results,
+            user: req.user
+        })
+
+    });
+    //res.render("doctors", {});
+})
+
 app.get('/dateCheck', (req,res)=>{
     console.log(req.query)
     let sql=`select count(*) as cnt,maximum_slot from appointment_info,doctor_hospital where appointment_date='${req.query.date}' and appointment_info.doctor_id='${req.query.docid}' and appointment_info.hospital_id='${req.query.hosid}' and appointment_info.doctor_id=doctor_hospital.doctor_id and appointment_info.hospital_id=doctor_hospital.hospital_id`;
