@@ -4,15 +4,15 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     <% } %>
-        <div class="m-5" style="width: 400px;">
-            <div class="form-floating mb-3">
+        <div class="col-12 pt-2">
+            <div class="form-floating">
                 <input type="password" id="oldpassword" name="oldpassword" class="form-control" required />
                 <label class="form-label" for="oldpassword">Old Password</label>
             </div>
         </div>
 
         <!-- Password input -->
-        <div class="m-5" style="width: 400px;">
+        <div class="col-12 pt-2">
             <div class="form-floating mb-3">
                 <input type="password" id="password" name="password" onChange="onChange()" class="form-control"
                     pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
@@ -23,7 +23,7 @@
         </div>
 
         <!-- Repeat Password input -->
-        <div class="m-5" style="width: 400px;">
+        <div class="col-12">
             <div class="form-floating mb-3">
                 <input type="password" id="confirm" name="confirm" onChange="onChange()" class="form-control" />
                 <label class="form-label" for="confirm">Confirm password</label>
@@ -31,7 +31,7 @@
         </div>
 
         <!-- Submit button -->
-        <div class="m-5" style="width: 400px;">
+        <div class="col-12 d-grid pt-2">
             <button type="submit" id="submit" class="btn btn-primary btn-block mb-3">Change
             </button>
         </div>
