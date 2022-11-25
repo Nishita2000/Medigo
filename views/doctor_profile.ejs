@@ -167,6 +167,8 @@
                     <!-- Appointment End -->
                     <script>
                         var date = new Date();
+                        var tday= date.getDay();
+                        //console.log(tday);
                         var tdate = date.getDate();
                         var tmonth = date.getMonth() + 1;
                         if (tdate < 10) {
@@ -183,6 +185,9 @@
                         function check_query() {
                             console.log("yes")
                             var date_ = document.getElementById("calDate").value;
+                            var date = new Date(date_);
+                            var tday =date.getDay();
+                            console.log(tday);
                             console.log(date_)
                             fetch('/dateCheck?date=' + date_ + '&&docid=<%=data.doctor_id%>&&hosid=<%=data.hospital_id%>').then(function (response) {
 
