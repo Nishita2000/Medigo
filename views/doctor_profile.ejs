@@ -30,7 +30,34 @@
                                         Time Slot:
                                     </h5>
                                     <h6 class="fw-normal fst-italic text-secondary">
-                                        <%= data.Monday%> - <%= data.Friday%>
+                                        
+                                        <% if(data.Monday==='Yes'){ %>
+                                            Mon,
+                                            <%}%>
+                                            <% if(data.Tuesday==='Yes'){ %>
+                                                Tues,
+                                                <%}%>
+                                                <% if(data.Wednesday==='Yes'){ %>
+                                                    Wed,
+                                                    <%}%>
+                                                    <% if(data.Thursday==='Yes'){ %>
+                                                        Thurs,
+                                                        <%}%>
+                                                        <% if(data.Friday==='Yes'){ %>
+                                                            Fri,
+                                                            <%}%>
+                                                            <% if(data.Saturday==='Yes'){ %>
+                                                                Sat,
+                                                                <%}%>
+                                            <% if(data.Sunday==='Yes'){ %>
+                                                Sun,
+                                                <%}%>
+                                               
+                                                    
+                                                        
+                                                            
+                                                                
+                                                
                                     </h6>
                                     <h6 class="fw-normal fst-italic text-secondary">
                                         <%= data.time_slot%>
