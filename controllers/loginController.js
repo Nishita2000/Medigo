@@ -103,6 +103,8 @@ const receptionistLoginPost = async (req, res) => {
     });
 }
 
+
+
 const adminLogin = (req, res) => {
     res.render('admin_login', {
         message: null

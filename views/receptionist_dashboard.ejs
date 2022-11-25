@@ -2,12 +2,42 @@
     <!-- <div id="preloader">
         <img class="load" src="/img/preloader3.gif" alt="#">
     </div> -->
-    
-        <!-- END LOADER -->
-        <%- include('./navigation_receptionist') -%>
 
-        <div class="col-12 text-center pt-3">
-            <a class="btn btn-primary" href="/receptionist/change_pass" role="button">Change password</a>
+    <!-- END LOADER -->
+    <%- include('./navigation_receptionist') -%>
+
+        <div class="container-fluid py-4">
+            <div class="container">
+                <div class="row g-5 ">
+                    <div class="col-12 team-item">
+                        <div class="row g-0 bg-light rounded overflow-hidden " style="width: 650px;">
+                            <div class="col-12 col-sm-5 h-100">
+                                <img class="img-fluid h-100" src="../img/admin2.png" style="object-fit: cover;">
+                            </div>
+                            <div class="col-6 col-sm-6 h-100 d-flex flex-column">
+                                <div class="mt-4 p-6">
+                                    <h3>
+                                        <!-- name -->
+                                        <%= info.receptionist_name %>
+                                    </h3>
+                                    <h6 class="fw-normal fst-italic text-primary mb-4">
+                                        <!-- email -->
+                                        <%= info.email %>
+                                    </h6>
+                                    <h6 class="fw-normal fst-italic text-primary mb-4">
+                                        <%= info.mobile %>
+                                    </h6>
+
+                                    <div class="col-12 text-center">
+                                        <a class="btn btn-primary" href="/receptionist/change_pass" role="button">Change
+                                            password</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- <div class="col-12 text-center p-3">
@@ -17,4 +47,4 @@
         </div> -->
 
 
-<%- include('./footer') -%>
+        <%- include('./footer') -%>
