@@ -77,7 +77,7 @@ app.get('/viewProfile_doc_id=:did&hos_id=:hid',async (req,res) => {
     //console.log(JSON.stringify(req.query));
     console.log(req.user);
     req.session.returnTo = req.originalUrl
-    let sql = `select doctor_info.name as doctor_name,doctor_info.doctor_id,hospital_info.hospital_id,specialty,mobile_no,email,designation,degree,visit_fee,first_day,last_day,time_slot,hospital_info.name as hospital_name,Suburb,District,Division from doctor_info,hospital_info,doctor_hospital where doctor_info.doctor_id= ? and hospital_info.hospital_id = ? and doctor_hospital.hospital_id=hospital_info.hospital_id and doctor_hospital.doctor_id=doctor_info.doctor_id`; 
+    let sql = `select doctor_info.name as doctor_name,doctor_info.doctor_id,hospital_info.hospital_id,specialty,mobile_no,email,designation,degree,visit_fee,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday,time_slot,hospital_info.name as hospital_name,Suburb,District,Division from doctor_info,hospital_info,doctor_hospital where doctor_info.doctor_id= ? and hospital_info.hospital_id = ? and doctor_hospital.hospital_id=hospital_info.hospital_id and doctor_hospital.doctor_id=doctor_info.doctor_id`; 
     let query = db.query(sql,[req.params.did,req.params.hid],(err, results) => {
         if (err) throw err;
         console.log(results);
@@ -289,16 +289,58 @@ app.get('/hospital_navbar', (req, res) => {
     //res.render("doctors", {});
 })
 
-app.get('/dateCheck', (req,res)=>{
+app.get('/dateCheck', async (req,res)=>{
     console.log(req.query)
+    let sql1;
+    if(req.query.tday=='0')
+    {
+        console.log("sun");
+        sql1=`select Sunday as Tday from doctor_hospital where doctor_id='${req.query.docid}' and hospital_id='${req.query.hosid}'`;
+    }
+    else if(req.query.tday=='1')
+    {
+        console.log("mon");
+        sql1=`select Monday as Tday from doctor_hospital where doctor_id='${req.query.docid}' and hospital_id='${req.query.hosid}'`;
+    }
+    else if(req.query.tday=='2')
+    {
+        console.log("tues");
+        sql1=`select Tuesday as Tday from doctor_hospital where doctor_id='${req.query.docid}' and hospital_id='${req.query.hosid}'`;
+    }
+    else if(req.query.tday=='3')
+    {
+        console.log("wed");
+        sql1=`select Wednesday as Tday from doctor_hospital where doctor_id='${req.query.docid}' and hospital_id='${req.query.hosid}'`;
+    }
+    else if(req.query.tday=='4')
+    {
+        console.log("thurs");
+        sql1=`select Thursday as Tday from doctor_hospital where doctor_id='${req.query.docid}' and hospital_id='${req.query.hosid}'`;
+    }
+    else if(req.query.tday=='5')
+    {
+        console.log("fri");
+        sql1=`select Friday as Tday from doctor_hospital where doctor_id='${req.query.docid}' and hospital_id='${req.query.hosid}'`;
+    }
+    else if(req.query.tday=='6')
+    {
+        console.log("sat");
+        sql1=`select Saturday as Tday from doctor_hospital where doctor_id='${req.query.docid}' and hospital_id='${req.query.hosid}'`;
+    }
     let sql=`select count(*) as cnt,maximum_slot from appointment_info,doctor_hospital where appointment_date='${req.query.date}' and appointment_info.doctor_id='${req.query.docid}' and appointment_info.hospital_id='${req.query.hosid}' and appointment_info.doctor_id=doctor_hospital.doctor_id and appointment_info.hospital_id=doctor_hospital.hospital_id`;
-    let query = db.query(sql, (err, results) => {
-        if (err) throw err;
-        console.log(results)
-        console.log(results[0].cnt);
-        console.log(results[0].maximum_slot);
+    let f_array=[];
+    f_array=f_array.concat(await getResult(sql));
+    f_array=f_array.concat(await getResult(sql1));
+    //let sql = `select doctor_info.name as doctor_name,specialty,email,hospital_info.name as hospital_name,Suburb,District,designation,degree,visit_fee from doctor_info,hospital_info,doctor_hospital where doctor_name=(Select distinct doctor_info.name as doctor_name from doctor_info,hospital_info,doctor_hospital where doctor_hospital.hospital_id=hospital_info.hospital_id and doctor_hospital.doctor_id=doctor_info.doctor_id)`;
+    // let query = db.query(sql, (err, results) => {
+    //     if (err) throw err;
+        console.log(f_array);
+        //res.send(results);
+        console.log(f_array[0].cnt);
+        console.log(f_array[0].maximum_slot);
+        console.log(f_array[1].Tday)
         //console.log(results[1]);
-        if(results[0].cnt==results[0].maximum_slot)
+        if(f_array[0].cnt==f_array[0].maximum_slot || f_array[1].Tday=='No')
         {
             console.log("slot no")
             
@@ -312,15 +354,10 @@ app.get('/dateCheck', (req,res)=>{
             console.log("slot yes")
             // res.json({message: "slots available"});
             res.json({message: "slots available",
-            cnt: results[0].cnt+1
+            cnt: f_array[0].cnt+1
         });
-            // req.flash("errors",`slot available`)
-            // res.redirect("/viewProfile_doc_id="+docid+"&hos_id="+hosid);
-            // res.render("doctor_profile",{
-            //     message: 'slots available'
-            // })
-        }
-    })
+    }
+
 })
 
 app.get('/get_data', function(request, response, next){

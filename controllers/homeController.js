@@ -18,7 +18,9 @@ db.connect((err) => {
 });
 
 const adminView = (req, res) => {
-    res.render('admin');
+    res.render('admin',{
+        data: req.session.admin
+    });
 }
 
 const adminHospitalView = (req, res) => {
@@ -233,7 +235,7 @@ const adminDoctorAssignView = (req, res) => {
 }
 
 const adminDoctorAssign = (req, res) => {
-    const { doctor_id, hospital_id,time_slot,maximum_slot,first_day,last_day } = req.body;
+    const { doctor_id, hospital_id,time_slot,maximum_slot,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday } = req.body;
     let sql2 = 'SELECT * FROM doctor_info';
     let query = db.query(sql2, (err, doctor_row) => {
         let sql3 = 'SELECT * FROM hospital_info';
@@ -250,17 +252,43 @@ const adminDoctorAssign = (req, res) => {
                     })
                 }
                 else {
-                    let sql4 = 'INSERT INTO doctor_hospital SET doctor_id = ?, hospital_id = ?,time_slot= ?, maximum_slot= ?, first_day= ?, last_day= ?'
-                    let query = db.query(sql4, [doctor_id, hospital_id,time_slot,maximum_slot,first_day,last_day], (err, rows) => {
-                        if (err) throw err;
-                        //console.log(rows);
-                        res.render('admin_doctor_assign', {
-                            message: 'Doctor assigned succesfully',
-                            doctor_row,
-                            hospital_row
-                        })
-                    });
-                    //console.log('doesntexist')     
+                    let sql = 'SELECT * FROM doctor_hospital Where doctor_id = ?';
+                    let query = db.query(sql, [doctor_id], (err, info) => {
+                        console.log(info.length)
+                        let flag = 0
+                        for (i = 0; i < info.length; i++){
+                            if (((info[i].Monday === Monday && Monday === "yes") || (info[i].Tuesday === Tuesday && Tuesday === "yes") || (info[i].Wednesday == Wednesday && Wednesday === "yes") || (info[i].Thursday == Thursday && Thursday === "yes") || (info[i].Friday == Friday && Friday === "yes") || (info[i].Saturday == Saturday && Saturday === "yes") || (info[i].Sunday == Sunday && Sunday === "yes")) && info[i].time_slot == time_slot) {
+                                flag = 1
+                                break;
+                            }
+                        }
+                        if (flag == 0) {
+                            let sql4 = 'INSERT INTO doctor_hospital SET doctor_id = ?, hospital_id = ?,time_slot= ?, maximum_slot= ?, Monday = ?, Tuesday = ?, Wednesday = ?, Thursday = ?, Friday = ?, Saturday = ?, Sunday = ?'
+                            let query = db.query(sql4, [doctor_id, hospital_id, time_slot, maximum_slot, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday], (err, rows) => {
+                                if (err) throw err;
+                                //console.log(req.body.Monday);
+                                res.render('admin_doctor_assign', {
+                                    message: 'Doctor assigned succesfully',
+                                    doctor_row,
+                                    hospital_row
+                                })
+                            });
+                        }
+                        else {
+                            res.render('admin_doctor_assign', {
+                                message: 'Time slot contradictory of doctor',
+                                doctor_row,
+                                hospital_row
+                            })
+                        }
+                    })
+                    // if (true) {
+
+                    // }
+                    // else {
+                        
+                    //     //console.log('doesntexist')     
+                    // }
                 }
             });
         })

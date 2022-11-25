@@ -30,7 +30,7 @@
                                         Time Slot:
                                     </h5>
                                     <h6 class="fw-normal fst-italic text-secondary">
-                                        <%= data.first_day%> - <%= data.last_day%>
+                                        <%= data.Monday%> - <%= data.Friday%>
                                     </h6>
                                     <h6 class="fw-normal fst-italic text-secondary">
                                         <%= data.time_slot%>
@@ -187,9 +187,39 @@
                             var date_ = document.getElementById("calDate").value;
                             var date = new Date(date_);
                             var tday =date.getDay();
+                            let dayname;
+                            if(tday==0)
+                            {
+                                dayname="Sunday";
+                            }
+                            else if(tday == 1)
+                            {
+                                dayname="Monday";
+                            }
+                            else if(tday==2)
+                            {
+                                dayname="Tuesday";
+                            }
+                            else if(tday==3)
+                            {
+                                dayname="Wednesday";
+                            }
+                            else if(tday==4)
+                            {
+                                dayname="Thurssday";
+                            }
+                            else if(tday==5)
+                            {
+                                dayname="Friday";
+                            }
+                            else if(tday==6)
+                            {
+                                dayname="Saturday";
+                            }
+                            console.log(dayname);
                             console.log(tday);
                             console.log(date_)
-                            fetch('/dateCheck?date=' + date_ + '&&docid=<%=data.doctor_id%>&&hosid=<%=data.hospital_id%>').then(function (response) {
+                            fetch('/dateCheck?date=' + date_ + '&&docid=<%=data.doctor_id%>&&hosid=<%=data.hospital_id%>&&tday=' + tday +'').then(function (response) {
 
                                 return response.json();
 
