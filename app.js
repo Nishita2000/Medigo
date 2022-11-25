@@ -231,7 +231,7 @@ app.post('/find', async (req, res) => {
     }
 })
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
     //req.flash("errors",`this is a test`)
     //res.redirect("/patient/login")
     // req.session.admin = null
@@ -240,18 +240,22 @@ app.get('/', (req, res) => {
     // res.render("index",{
     //     user: req.user
     // });
-    let sql = `select name,degree,year_of_experience,email from doctor_info order by visit_count desc LIMIT 5`;
+    let sql = `select name as doctor_name,degree,year_of_experience,email from doctor_info order by visit_count desc LIMIT 5`;
+    let sql2 = `select name as hospital_name,Suburb,District,Specialization,description from hospital_info order by count_visit desc LIMIT 5`;
+    let final_array= [];
+    final_array=final_array.concat(await getResult(sql));
+    final_array=final_array.concat(await getResult(sql2));
     //let sql = `select doctor_info.name as doctor_name,specialty,email,hospital_info.name as hospital_name,Suburb,District,designation,degree,visit_fee from doctor_info,hospital_info,doctor_hospital where doctor_name=(Select distinct doctor_info.name as doctor_name from doctor_info,hospital_info,doctor_hospital where doctor_hospital.hospital_id=hospital_info.hospital_id and doctor_hospital.doctor_id=doctor_info.doctor_id)`;
-    let query = db.query(sql, (err, results) => {
-        if (err) throw err;
-        console.log(results);
+    // let query = db.query(sql, (err, results) => {
+    //     if (err) throw err;
+        console.log(final_array);
         //res.send(results);
         res.render("index", {
-            data: results,
+            data: final_array,
             user: req.user
         })
 
-    });
+    // });
 })
 
 app.get('/doctors', (req, res) => {
